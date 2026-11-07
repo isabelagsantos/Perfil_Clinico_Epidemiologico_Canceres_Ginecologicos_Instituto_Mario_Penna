@@ -21,6 +21,8 @@
 "tabela";"Mesorregião de residência: câncer de ovário";"../saidas/ovario/tabelas/ovario_mesorregiao.html"
 "figura";"mesorregiao";"../saidas/ovario/figuras/ovario_mesorregiao.png"
 "figura";"mesorregiao";"../saidas/ovario/figuras/ovario_mesorregiao.pdf"
+"figura";"mapa_mesorregiao";"../saidas/ovario/figuras/ovario_mapa_mesorregiao.png"
+"figura";"mapa_mesorregiao";"../saidas/ovario/figuras/ovario_mapa_mesorregiao.pdf"
 "tabela";"20 municípios com mais pacientes: câncer de ovário";"../saidas/ovario/tabelas/ovario_municipios_top20.csv"
 "tabela";"20 municípios com mais pacientes: câncer de ovário";"../saidas/ovario/tabelas/ovario_municipios_top20.html"
 "painel";"painel_sociodemografico";"../saidas/ovario/paineis/ovario_painel_sociodemografico.png"

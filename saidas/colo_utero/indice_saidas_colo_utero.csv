@@ -21,6 +21,8 @@
 "tabela";"Mesorregião de residência: câncer de colo do útero";"../saidas/colo_utero/tabelas/colo_utero_mesorregiao.html"
 "figura";"mesorregiao";"../saidas/colo_utero/figuras/colo_utero_mesorregiao.png"
 "figura";"mesorregiao";"../saidas/colo_utero/figuras/colo_utero_mesorregiao.pdf"
+"figura";"mapa_mesorregiao";"../saidas/colo_utero/figuras/colo_utero_mapa_mesorregiao.png"
+"figura";"mapa_mesorregiao";"../saidas/colo_utero/figuras/colo_utero_mapa_mesorregiao.pdf"
 "tabela";"20 municípios com mais pacientes: câncer de colo do útero";"../saidas/colo_utero/tabelas/colo_utero_municipios_top20.csv"
 "tabela";"20 municípios com mais pacientes: câncer de colo do útero";"../saidas/colo_utero/tabelas/colo_utero_municipios_top20.html"
 "painel";"painel_sociodemografico";"../saidas/colo_utero/paineis/colo_utero_painel_sociodemografico.png"
