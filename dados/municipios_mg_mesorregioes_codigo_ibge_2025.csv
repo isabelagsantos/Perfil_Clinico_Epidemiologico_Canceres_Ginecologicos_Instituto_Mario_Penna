@@ -1,0 +1,854 @@
+mesorregiao,municipio,codigo_ibge
+Noroeste de Minas,ARINOS,3104502
+Noroeste de Minas,BONFINOPOLIS DE MINAS,3108206
+Noroeste de Minas,BURITIS,3109303
+Noroeste de Minas,CABECEIRA GRANDE,3109451
+Noroeste de Minas,DOM BOSCO,3122470
+Noroeste de Minas,FORMOSO,3126208
+Noroeste de Minas,NATALANDIA,3144375
+Noroeste de Minas,UNAI,3170404
+Noroeste de Minas,URUANA DE MINAS,3170479
+Noroeste de Minas,BRASILANDIA DE MINAS,3108552
+Noroeste de Minas,GUARDA MOR,3128600
+Noroeste de Minas,JOAO PINHEIRO,3136306
+Noroeste de Minas,LAGAMAR,3137106
+Noroeste de Minas,LAGOA GRANDE,3137536
+Noroeste de Minas,PARACATU,3147006
+Noroeste de Minas,PRESIDENTE OLEGARIO,3153400
+Noroeste de Minas,SAO GONCALO DO ABAETE,3161700
+Noroeste de Minas,VARJAO DE MINAS,3170750
+Noroeste de Minas,VAZANTE,3171006
+Norte de Minas,BONITO DE MINAS,3108255
+Norte de Minas,CHAPADA GAUCHA,3116159
+Norte de Minas,CONEGO MARINHO,3117836
+Norte de Minas,ICARAI DE MINAS,3130051
+Norte de Minas,ITACARAMBI,3132107
+Norte de Minas,JANUARIA,3135209
+Norte de Minas,JUVENILIA,3136959
+Norte de Minas,MANGA,3139300
+Norte de Minas,MATIAS CARDOSO,3140852
+Norte de Minas,MIRAVANIA,3142254
+Norte de Minas,MONTALVANIA,3142700
+Norte de Minas,PEDRAS DE MARIA DA CRUZ,3149150
+Norte de Minas,PINTOPOLIS,3150570
+Norte de Minas,SAO FRANCISCO,3161106
+Norte de Minas,SAO JOAO DAS MISSOES,3162450
+Norte de Minas,URUCUIA,3170529
+Norte de Minas,CATUTI,3115474
+Norte de Minas,ESPINOSA,3124302
+Norte de Minas,GAMELEIRAS,3127339
+Norte de Minas,JAIBA,3135050
+Norte de Minas,JANAUBA,3135100
+Norte de Minas,MAMONAS,3139250
+Norte de Minas,MATO VERDE,3141009
+Norte de Minas,MONTE AZUL,3142908
+Norte de Minas,NOVA PORTEIRINHA,3145059
+Norte de Minas,PAI PEDRO,3146552
+Norte de Minas,PORTEIRINHA,3152204
+Norte de Minas,RIACHO DOS MACHADOS,3154507
+Norte de Minas,SERRANOPOLIS DE MINAS,3166956
+Norte de Minas,AGUAS VERMELHAS,3101003
+Norte de Minas,BERIZAL,3106655
+Norte de Minas,CURRAL DE DENTRO,3120870
+Norte de Minas,DIVISA ALEGRE,3122355
+Norte de Minas,FRUTA DE LEITE,3127073
+Norte de Minas,INDAIABIRA,3130655
+Norte de Minas,MONTEZUMA,3143450
+Norte de Minas,NINHEIRA,3144656
+Norte de Minas,NOVORIZONTE,3145372
+Norte de Minas,RIO PARDO DE MINAS,3155603
+Norte de Minas,RUBELITA,3156502
+Norte de Minas,SALINAS,3157005
+Norte de Minas,SANTA CRUZ DE SALINAS,3157377
+Norte de Minas,SANTO ANTONIO DO RETIRO,3160454
+Norte de Minas,SAO JOAO DO PARAISO,3162708
+Norte de Minas,TAIOBEIRAS,3168002
+Norte de Minas,VARGEM GRANDE DO RIO PARDO,3170651
+Norte de Minas,BURITIZEIRO,3109402
+Norte de Minas,IBIAI,3129608
+Norte de Minas,JEQUITAI,3135605
+Norte de Minas,LAGOA DOS PATOS,3137304
+Norte de Minas,LASSANCE,3138104
+Norte de Minas,PIRAPORA,3151206
+Norte de Minas,RIACHINHO,3154457
+Norte de Minas,SANTA FE DE MINAS,3157609
+Norte de Minas,SAO ROMAO,3164209
+Norte de Minas,VARZEA DA PALMA,3170800
+Norte de Minas,BRASILIA DE MINAS,3108602
+Norte de Minas,CAMPO AZUL,3111150
+Norte de Minas,CAPITAO ENEAS,3112703
+Norte de Minas,CLARO DOS POCOES,3116506
+Norte de Minas,CORACAO DE JESUS,3118809
+Norte de Minas,FRANCISCO SA,3126703
+Norte de Minas,GLAUCILANDIA,3127354
+Norte de Minas,IBIRACATU,3129657
+Norte de Minas,JAPONVAR,3135357
+Norte de Minas,JURAMENTO,3136801
+Norte de Minas,LONTRA,3138658
+Norte de Minas,LUISLANDIA,3138682
+Norte de Minas,MIRABELA,3142007
+Norte de Minas,MONTES CLAROS,3143302
+Norte de Minas,PATIS,3147956
+Norte de Minas,PONTO CHIQUE,3152131
+Norte de Minas,SAO JOAO DA LAGOA,3162252
+Norte de Minas,SAO JOAO DA PONTE,3162401
+Norte de Minas,SAO JOAO DO PACUI,3162658
+Norte de Minas,UBAI,3170008
+Norte de Minas,VARZELANDIA,3170909
+Norte de Minas,VERDELANDIA,3171030
+Norte de Minas,BOTUMIRIM,3108503
+Norte de Minas,CRISTALIA,3120300
+Norte de Minas,GRAO MOGOL,3127800
+Norte de Minas,ITACAMBIRA,3132008
+Norte de Minas,JOSENOPOLIS,3136579
+Norte de Minas,PADRE CARVALHO,3146255
+Norte de Minas,BOCAIUVA,3107307
+Norte de Minas,ENGENHEIRO NAVARRO,3123809
+Norte de Minas,FRANCISCO DUMONT,3126604
+Norte de Minas,GUARACIAMA,3128253
+Norte de Minas,OLHOS D AGUA,3145455
+Jequitinhonha,COUTO DE MAGALHAES DE MINAS,3120102
+Jequitinhonha,DATAS,3121001
+Jequitinhonha,DIAMANTINA,3121605
+Jequitinhonha,FELICIO DOS SANTOS,3125408
+Jequitinhonha,GOUVEIA,3127602
+Jequitinhonha,PRESIDENTE KUBITSCHEK,3153301
+Jequitinhonha,SAO GONCALO DO RIO PRETO,3125507
+Jequitinhonha,SENADOR MODESTINO GONCALVES,3165909
+Jequitinhonha,ANGELANDIA,3102852
+Jequitinhonha,ARICANDUVA,3104452
+Jequitinhonha,BERILO,3106507
+Jequitinhonha,CAPELINHA,3112307
+Jequitinhonha,CARBONITA,3113503
+Jequitinhonha,CHAPADA DO NORTE,3116100
+Jequitinhonha,FRANCISCO BADARO,3126505
+Jequitinhonha,ITAMARANDIBA,3132503
+Jequitinhonha,JENIPAPO DE MINAS,3135456
+Jequitinhonha,JOSE GONCALVES DE MINAS,3136520
+Jequitinhonha,LEME DO PRADO,3138351
+Jequitinhonha,MINAS NOVAS,3141801
+Jequitinhonha,TURMALINA,3169703
+Jequitinhonha,VEREDINHA,3171071
+Jequitinhonha,ARACUAI,3103405
+Jequitinhonha,CARAI,3113008
+Jequitinhonha,CORONEL MURTA,3119500
+Jequitinhonha,ITINGA,3134004
+Jequitinhonha,NOVO CRUZEIRO,3145307
+Jequitinhonha,PADRE PARAISO,3146305
+Jequitinhonha,PONTO DOS VOLANTES,3152170
+Jequitinhonha,VIRGEM DA LAPA,3171600
+Jequitinhonha,CACHOEIRA DE PAJEU,3102704
+Jequitinhonha,COMERCINHO,3117009
+Jequitinhonha,ITAOBIM,3133303
+Jequitinhonha,MEDINA,3141405
+Jequitinhonha,PEDRA AZUL,3148707
+Jequitinhonha,ALMENARA,3101706
+Jequitinhonha,BANDEIRA,3105202
+Jequitinhonha,DIVISOPOLIS,3122454
+Jequitinhonha,FELISBURGO,3125606
+Jequitinhonha,JACINTO,3134707
+Jequitinhonha,JEQUITINHONHA,3135803
+Jequitinhonha,JOAIMA,3136009
+Jequitinhonha,JORDANIA,3136504
+Jequitinhonha,MATA VERDE,3140555
+Jequitinhonha,MONTE FORMOSO,3143153
+Jequitinhonha,PALMOPOLIS,3146750
+Jequitinhonha,RIO DO PRADO,3155108
+Jequitinhonha,RUBIM,3156601
+Jequitinhonha,SALTO DA DIVISA,3157104
+Jequitinhonha,SANTA MARIA DO SALTO,3158102
+Jequitinhonha,SANTO ANTONIO DO JACINTO,3160306
+Vale do Mucuri,ATALEIA,3104700
+Vale do Mucuri,CATUJI,3115458
+Vale do Mucuri,FRANCISCOPOLIS,3126752
+Vale do Mucuri,FREI GASPAR,3126802
+Vale do Mucuri,ITAIPE,3132305
+Vale do Mucuri,LADAINHA,3137007
+Vale do Mucuri,MALACACHETA,3139201
+Vale do Mucuri,NOVO ORIENTE DE MINAS,3145356
+Vale do Mucuri,OURO VERDE DE MINAS,3146206
+Vale do Mucuri,PAVAO,3148509
+Vale do Mucuri,POTE,3152402
+Vale do Mucuri,SETUBINHA,3165552
+Vale do Mucuri,TEOFILO OTONI,3168606
+Vale do Mucuri,AGUAS FORMOSAS,3100906
+Vale do Mucuri,BERTOPOLIS,3106606
+Vale do Mucuri,CARLOS CHAGAS,3113701
+Vale do Mucuri,CRISOLITA,3120151
+Vale do Mucuri,FRONTEIRA DOS VALES,3127057
+Vale do Mucuri,MACHACALIS,3138906
+Vale do Mucuri,NANUQUE,3144300
+Vale do Mucuri,SANTA HELENA DE MINAS,3157658
+Vale do Mucuri,SERRA DOS AIMORES,3166709
+Vale do Mucuri,UMBURATIBA,3170305
+Triangulo Mineiro Alto Paranaiba,CACHOEIRA DOURADA,3109808
+Triangulo Mineiro Alto Paranaiba,CAPINOPOLIS,3112604
+Triangulo Mineiro Alto Paranaiba,GURINHATA,3129103
+Triangulo Mineiro Alto Paranaiba,IPIACU,3131406
+Triangulo Mineiro Alto Paranaiba,ITUIUTABA,3134202
+Triangulo Mineiro Alto Paranaiba,SANTA VITORIA,3159803
+Triangulo Mineiro Alto Paranaiba,ARAGUARI,3103504
+Triangulo Mineiro Alto Paranaiba,ARAPORA,3103751
+Triangulo Mineiro Alto Paranaiba,CANAPOLIS,3111804
+Triangulo Mineiro Alto Paranaiba,CASCALHO RICO,3115003
+Triangulo Mineiro Alto Paranaiba,CENTRALINA,3115805
+Triangulo Mineiro Alto Paranaiba,INDIANOPOLIS,3130705
+Triangulo Mineiro Alto Paranaiba,MONTE ALEGRE DE MINAS,3142809
+Triangulo Mineiro Alto Paranaiba,PRATA,3152808
+Triangulo Mineiro Alto Paranaiba,TUPACIGUARA,3169604
+Triangulo Mineiro Alto Paranaiba,UBERLANDIA,3170206
+Triangulo Mineiro Alto Paranaiba,ABADIA DOS DOURADOS,3100104
+Triangulo Mineiro Alto Paranaiba,COROMANDEL,3119302
+Triangulo Mineiro Alto Paranaiba,CRUZEIRO DA FORTALEZA,3120706
+Triangulo Mineiro Alto Paranaiba,DOURADOQUARA,3123502
+Triangulo Mineiro Alto Paranaiba,ESTRELA DO SUL,3124807
+Triangulo Mineiro Alto Paranaiba,GRUPIARA,3127909
+Triangulo Mineiro Alto Paranaiba,IRAI DE MINAS,3131604
+Triangulo Mineiro Alto Paranaiba,MONTE CARMELO,3143104
+Triangulo Mineiro Alto Paranaiba,PATROCINIO,3148103
+Triangulo Mineiro Alto Paranaiba,ROMARIA,3156403
+Triangulo Mineiro Alto Paranaiba,SERRA DO SALITRE,3166808
+Triangulo Mineiro Alto Paranaiba,ARAPUA,3103801
+Triangulo Mineiro Alto Paranaiba,CARMO DO PARANAIBA,3114303
+Triangulo Mineiro Alto Paranaiba,GUIMARANIA,3128907
+Triangulo Mineiro Alto Paranaiba,LAGOA FORMOSA,3137502
+Triangulo Mineiro Alto Paranaiba,MATUTINA,3141207
+Triangulo Mineiro Alto Paranaiba,PATOS DE MINAS,3148004
+Triangulo Mineiro Alto Paranaiba,RIO PARANAIBA,3155504
+Triangulo Mineiro Alto Paranaiba,SANTA ROSA DA SERRA,3159704
+Triangulo Mineiro Alto Paranaiba,SAO GOTARDO,3162104
+Triangulo Mineiro Alto Paranaiba,TIROS,3168903
+Triangulo Mineiro Alto Paranaiba,CAMPINA VERDE,3111101
+Triangulo Mineiro Alto Paranaiba,CARNEIRINHO,3114550
+Triangulo Mineiro Alto Paranaiba,COMENDADOR GOMES,3116902
+Triangulo Mineiro Alto Paranaiba,FRONTEIRA,3127008
+Triangulo Mineiro Alto Paranaiba,FRUTAL,3127107
+Triangulo Mineiro Alto Paranaiba,ITAPAGIPE,3133402
+Triangulo Mineiro Alto Paranaiba,ITURAMA,3134400
+Triangulo Mineiro Alto Paranaiba,LIMEIRA DO OESTE,3138625
+Triangulo Mineiro Alto Paranaiba,PIRAJUBA,3150703
+Triangulo Mineiro Alto Paranaiba,PLANURA,3151602
+Triangulo Mineiro Alto Paranaiba,SAO FRANCISCO DE SALES,3161304
+Triangulo Mineiro Alto Paranaiba,UNIAO DE MINAS,3170438
+Triangulo Mineiro Alto Paranaiba,AGUA COMPRIDA,3100708
+Triangulo Mineiro Alto Paranaiba,CAMPO FLORIDO,3111408
+Triangulo Mineiro Alto Paranaiba,CONCEICAO DAS ALAGOAS,3117306
+Triangulo Mineiro Alto Paranaiba,CONQUISTA,3118205
+Triangulo Mineiro Alto Paranaiba,DELTA,3121258
+Triangulo Mineiro Alto Paranaiba,UBERABA,3170107
+Triangulo Mineiro Alto Paranaiba,VERISSIMO,3171105
+Triangulo Mineiro Alto Paranaiba,ARAXA,3104007
+Triangulo Mineiro Alto Paranaiba,CAMPOS ALTOS,3111507
+Triangulo Mineiro Alto Paranaiba,IBIA,3129509
+Triangulo Mineiro Alto Paranaiba,NOVA PONTE,3145000
+Triangulo Mineiro Alto Paranaiba,PEDRINOPOLIS,3149200
+Triangulo Mineiro Alto Paranaiba,PERDIZES,3149804
+Triangulo Mineiro Alto Paranaiba,PRATINHA,3153004
+Triangulo Mineiro Alto Paranaiba,SACRAMENTO,3156908
+Triangulo Mineiro Alto Paranaiba,SANTA JULIANA,3157708
+Triangulo Mineiro Alto Paranaiba,TAPIRA,3168101
+Central Mineira,ABAETE,3100203
+Central Mineira,BIQUINHAS,3107000
+Central Mineira,CEDRO DO ABAETE,3115607
+Central Mineira,MORADA NOVA DE MINAS,3143500
+Central Mineira,PAINEIRAS,3146404
+Central Mineira,POMPEU,3152006
+Central Mineira,TRES MARIAS,3169356
+Central Mineira,AUGUSTO DE LIMA,3104809
+Central Mineira,BUENOPOLIS,3109204
+Central Mineira,CORINTO,3119104
+Central Mineira,CURVELO,3120904
+Central Mineira,FELIXLANDIA,3125705
+Central Mineira,INIMUTABA,3131109
+Central Mineira,JOAQUIM FELICIO,3136405
+Central Mineira,MONJOLOS,3142502
+Central Mineira,MORRO DA GARCA,3143609
+Central Mineira,PRESIDENTE JUSCELINO,3153202
+Central Mineira,SANTO HIPOLITO,3160603
+Central Mineira,ARAUJOS,3103900
+Central Mineira,BOM DESPACHO,3107406
+Central Mineira,DORES DO INDAIA,3123205
+Central Mineira,ESTRELA DO INDAIA,3124708
+Central Mineira,JAPARAIBA,3135308
+Central Mineira,LAGOA DA PRATA,3137205
+Central Mineira,LEANDRO FERREIRA,3138302
+Central Mineira,LUZ,3138807
+Central Mineira,MARTINHO CAMPOS,3140506
+Central Mineira,MOEMA,3142403
+Central Mineira,QUARTEL GERAL,3153707
+Central Mineira,SERRA DA SAUDADE,3166600
+Metropolitana de Belo Horizonte,ARACAI,3103207
+Metropolitana de Belo Horizonte,BALDIM,3105004
+Metropolitana de Belo Horizonte,CACHOEIRA DA PRATA,3109600
+Metropolitana de Belo Horizonte,CAETANOPOLIS,3109907
+Metropolitana de Belo Horizonte,CAPIM BRANCO,3112505
+Metropolitana de Belo Horizonte,CORDISBURGO,3118908
+Metropolitana de Belo Horizonte,FORTUNA DE MINAS,3126406
+Metropolitana de Belo Horizonte,FUNILANDIA,3127206
+Metropolitana de Belo Horizonte,INHAUMA,3131000
+Metropolitana de Belo Horizonte,JABOTICATUBAS,3134608
+Metropolitana de Belo Horizonte,JEQUITIBA,3135704
+Metropolitana de Belo Horizonte,MARAVILHAS,3139706
+Metropolitana de Belo Horizonte,MATOZINHOS,3141108
+Metropolitana de Belo Horizonte,PAPAGAIOS,3146909
+Metropolitana de Belo Horizonte,PARAOPEBA,3147402
+Metropolitana de Belo Horizonte,PEQUI,3149606
+Metropolitana de Belo Horizonte,PRUDENTE DE MORAIS,3153608
+Metropolitana de Belo Horizonte,SANTANA DE PIRAPAMA,3158508
+Metropolitana de Belo Horizonte,SANTANA DO RIACHO,3159001
+Metropolitana de Belo Horizonte,SETE LAGOAS,3167202
+Metropolitana de Belo Horizonte,ALVORADA DE MINAS,3102407
+Metropolitana de Belo Horizonte,CONCEICAO DO MATO DENTRO,3117504
+Metropolitana de Belo Horizonte,CONGONHAS DO NORTE,3118106
+Metropolitana de Belo Horizonte,DOM JOAQUIM,3122603
+Metropolitana de Belo Horizonte,ITAMBE DO MATO DENTRO,3132800
+Metropolitana de Belo Horizonte,MORRO DO PILAR,3143708
+Metropolitana de Belo Horizonte,PASSABEM,3147501
+Metropolitana de Belo Horizonte,RIO VERMELHO,3156007
+Metropolitana de Belo Horizonte,SANTO ANTONIO DO ITAMBE,3160207
+Metropolitana de Belo Horizonte,SANTO ANTONIO DO RIO ABAIXO,3160504
+Metropolitana de Belo Horizonte,SAO SEBASTIAO DO RIO PRETO,3164803
+Metropolitana de Belo Horizonte,SERRA AZUL DE MINAS,3166501
+Metropolitana de Belo Horizonte,SERRO,3167103
+Metropolitana de Belo Horizonte,FLORESTAL,3126000
+Metropolitana de Belo Horizonte,ONCA DE PITANGUI,3145802
+Metropolitana de Belo Horizonte,PARA DE MINAS,3147105
+Metropolitana de Belo Horizonte,PITANGUI,3151404
+Metropolitana de Belo Horizonte,SAO JOSE DA VARGINHA,3163102
+Metropolitana de Belo Horizonte,BELO HORIZONTE,3106200
+Metropolitana de Belo Horizonte,BETIM,3106705
+Metropolitana de Belo Horizonte,BRUMADINHO,3109006
+Metropolitana de Belo Horizonte,CAETE,3110004
+Metropolitana de Belo Horizonte,CONFINS,3117876
+Metropolitana de Belo Horizonte,CONTAGEM,3118601
+Metropolitana de Belo Horizonte,ESMERALDAS,3124104
+Metropolitana de Belo Horizonte,IBIRITE,3129806
+Metropolitana de Belo Horizonte,IGARAPE,3130101
+Metropolitana de Belo Horizonte,JUATUBA,3136652
+Metropolitana de Belo Horizonte,LAGOA SANTA,3137601
+Metropolitana de Belo Horizonte,MARIO CAMPOS,3140159
+Metropolitana de Belo Horizonte,MATEUS LEME,3140704
+Metropolitana de Belo Horizonte,NOVA LIMA,3144805
+Metropolitana de Belo Horizonte,PEDRO LEOPOLDO,3149309
+Metropolitana de Belo Horizonte,RAPOSOS,3153905
+Metropolitana de Belo Horizonte,RIBEIRAO DAS NEVES,3154606
+Metropolitana de Belo Horizonte,RIO ACIMA,3154804
+Metropolitana de Belo Horizonte,SABARA,3156700
+Metropolitana de Belo Horizonte,SANTA LUZIA,3157807
+Metropolitana de Belo Horizonte,SAO JOAQUIM DE BICAS,3162922
+Metropolitana de Belo Horizonte,SAO JOSE DA LAPA,3162955
+Metropolitana de Belo Horizonte,SARZEDO,3165537
+Metropolitana de Belo Horizonte,VESPASIANO,3171204
+Metropolitana de Belo Horizonte,ALVINOPOLIS,3102308
+Metropolitana de Belo Horizonte,BARAO DE COCAIS,3105400
+Metropolitana de Belo Horizonte,BELA VISTA DE MINAS,3106002
+Metropolitana de Belo Horizonte,BOM JESUS DO AMPARO,3107703
+Metropolitana de Belo Horizonte,CATAS ALTAS,3115359
+Metropolitana de Belo Horizonte,DIONISIO,3121803
+Metropolitana de Belo Horizonte,FERROS,3125903
+Metropolitana de Belo Horizonte,ITABIRA,3131703
+Metropolitana de Belo Horizonte,JOAO MONLEVADE,3136207
+Metropolitana de Belo Horizonte,NOVA ERA,3144706
+Metropolitana de Belo Horizonte,NOVA UNIAO,3136603
+Metropolitana de Belo Horizonte,RIO PIRACICABA,3155702
+Metropolitana de Belo Horizonte,SANTA BARBARA,3157203
+Metropolitana de Belo Horizonte,SANTA MARIA DE ITABIRA,3158003
+Metropolitana de Belo Horizonte,SAO DOMINGOS DO PRATA,3161007
+Metropolitana de Belo Horizonte,SAO GONCALO DO RIO ABAIXO,3161908
+Metropolitana de Belo Horizonte,SAO JOSE DO GOIABAL,3163409
+Metropolitana de Belo Horizonte,TAQUARACU DE MINAS,3168309
+Metropolitana de Belo Horizonte,BELO VALE,3106408
+Metropolitana de Belo Horizonte,BONFIM,3108107
+Metropolitana de Belo Horizonte,CRUCILANDIA,3120607
+Metropolitana de Belo Horizonte,ITAGUARA,3132206
+Metropolitana de Belo Horizonte,ITATIAIUCU,3133709
+Metropolitana de Belo Horizonte,JECEABA,3135407
+Metropolitana de Belo Horizonte,MOEDA,3142304
+Metropolitana de Belo Horizonte,PIEDADE DOS GERAIS,3150406
+Metropolitana de Belo Horizonte,RIO MANSO,3155306
+Metropolitana de Belo Horizonte,DIOGO DE VASCONCELOS,3121704
+Metropolitana de Belo Horizonte,ITABIRITO,3131901
+Metropolitana de Belo Horizonte,MARIANA,3140001
+Metropolitana de Belo Horizonte,OURO PRETO,3146107
+Metropolitana de Belo Horizonte,CASA GRANDE,3114907
+Metropolitana de Belo Horizonte,CATAS ALTAS DA NORUEGA,3115409
+Metropolitana de Belo Horizonte,CONGONHAS,3118007
+Metropolitana de Belo Horizonte,CONSELHEIRO LAFAIETE,3118304
+Metropolitana de Belo Horizonte,CRISTIANO OTONI,3120409
+Metropolitana de Belo Horizonte,DESTERRO DE ENTRE RIOS,3121407
+Metropolitana de Belo Horizonte,ENTRE RIOS DE MINAS,3123908
+Metropolitana de Belo Horizonte,ITAVERAVA,3133907
+Metropolitana de Belo Horizonte,OURO BRANCO,3145901
+Metropolitana de Belo Horizonte,QUELUZITO,3153806
+Metropolitana de Belo Horizonte,SANTANA DOS MONTES,3159100
+Metropolitana de Belo Horizonte,SAO BRAS DO SUACUI,3160900
+Vale do Rio Doce,BRAUNAS,3108800
+Vale do Rio Doce,CARMESIA,3113800
+Vale do Rio Doce,COLUNA,3116803
+Vale do Rio Doce,DIVINOLANDIA DE MINAS,3122207
+Vale do Rio Doce,DORES DE GUANHAES,3123106
+Vale do Rio Doce,GONZAGA,3127503
+Vale do Rio Doce,GUANHAES,3128006
+Vale do Rio Doce,MATERLANDIA,3140605
+Vale do Rio Doce,PAULISTAS,3148400
+Vale do Rio Doce,SABINOPOLIS,3156809
+Vale do Rio Doce,SANTA EFIGENIA DE MINAS,3157500
+Vale do Rio Doce,SAO JOAO EVANGELISTA,3162807
+Vale do Rio Doce,SARDOA,3165503
+Vale do Rio Doce,SENHORA DO PORTO,3166105
+Vale do Rio Doce,VIRGINOPOLIS,3171808
+Vale do Rio Doce,AGUA BOA,3100609
+Vale do Rio Doce,CANTAGALO,3112059
+Vale do Rio Doce,FREI LAGONEGRO,3126950
+Vale do Rio Doce,JOSE RAYDAN,3136553
+Vale do Rio Doce,PECANHA,3148608
+Vale do Rio Doce,SANTA MARIA DO SUACUI,3158201
+Vale do Rio Doce,SAO JOSE DO JACURI,3163508
+Vale do Rio Doce,SAO PEDRO DO SUACUI,3164100
+Vale do Rio Doce,SAO SEBASTIAO DO MARANHAO,3164506
+Vale do Rio Doce,ALPERCATA,3101805
+Vale do Rio Doce,CAMPANARIO,3110806
+Vale do Rio Doce,CAPITAO ANDRADE,3112653
+Vale do Rio Doce,COROACI,3119203
+Vale do Rio Doce,DIVINO DAS LARANJEIRAS,3122108
+Vale do Rio Doce,ENGENHEIRO CALDAS,3123700
+Vale do Rio Doce,FERNANDES TOURINHO,3125804
+Vale do Rio Doce,FREI INOCENCIO,3126901
+Vale do Rio Doce,GALILEIA,3127305
+Vale do Rio Doce,GOVERNADOR VALADARES,3127701
+Vale do Rio Doce,ITAMBACURI,3132701
+Vale do Rio Doce,ITANHOMI,3133204
+Vale do Rio Doce,JAMPRUCA,3135076
+Vale do Rio Doce,MARILAC,3140100
+Vale do Rio Doce,MATHIAS LOBATO,3171501
+Vale do Rio Doce,NACIP RAYDAN,3144201
+Vale do Rio Doce,NOVA MODICA,3144904
+Vale do Rio Doce,PESCADOR,3150000
+Vale do Rio Doce,SAO GERALDO DA PIEDADE,3161601
+Vale do Rio Doce,SAO GERALDO DO BAIXIO,3161650
+Vale do Rio Doce,SAO JOSE DA SAFIRA,3163003
+Vale do Rio Doce,SAO JOSE DO DIVINO,3163300
+Vale do Rio Doce,SOBRALIA,3167707
+Vale do Rio Doce,TUMIRITINGA,3169505
+Vale do Rio Doce,VIRGOLANDIA,3171907
+Vale do Rio Doce,CENTRAL DE MINAS,3115706
+Vale do Rio Doce,ITABIRINHA,3131802
+Vale do Rio Doce,MANTENA,3139607
+Vale do Rio Doce,MENDES PIMENTEL,3141504
+Vale do Rio Doce,NOVA BELEM,3144672
+Vale do Rio Doce,SAO FELIX DE MINAS,3161056
+Vale do Rio Doce,SAO JOAO DO MANTENINHA,3162575
+Vale do Rio Doce,ACUCENA,3100500
+Vale do Rio Doce,ANTONIO DIAS,3103009
+Vale do Rio Doce,BELO ORIENTE,3106309
+Vale do Rio Doce,CORONEL FABRICIANO,3119401
+Vale do Rio Doce,IPATINGA,3131307
+Vale do Rio Doce,JAGUARACU,3135001
+Vale do Rio Doce,JOANESIA,3136108
+Vale do Rio Doce,MARLIERIA,3140308
+Vale do Rio Doce,MESQUITA,3141702
+Vale do Rio Doce,NAQUE,3144359
+Vale do Rio Doce,PERIQUITO,3149952
+Vale do Rio Doce,SANTANA DO PARAISO,3158953
+Vale do Rio Doce,TIMOTEO,3168705
+Vale do Rio Doce,BOM JESUS DO GALHO,3107802
+Vale do Rio Doce,BUGRE,3109253
+Vale do Rio Doce,CARATINGA,3113404
+Vale do Rio Doce,CORREGO NOVO,3120003
+Vale do Rio Doce,DOM CAVATI,3122504
+Vale do Rio Doce,ENTRE FOLHAS,3123858
+Vale do Rio Doce,IAPU,3129301
+Vale do Rio Doce,IMBE DE MINAS,3130556
+Vale do Rio Doce,INHAPIM,3130903
+Vale do Rio Doce,IPABA,3131158
+Vale do Rio Doce,PIEDADE DE CARATINGA,3150158
+Vale do Rio Doce,PINGO D AGUA,3150539
+Vale do Rio Doce,SANTA RITA DE MINAS,3159357
+Vale do Rio Doce,SAO DOMINGOS DAS DORES,3160959
+Vale do Rio Doce,SAO JOAO DO ORIENTE,3162609
+Vale do Rio Doce,SAO SEBASTIAO DO ANTA,3164472
+Vale do Rio Doce,TARUMIRIM,3168408
+Vale do Rio Doce,UBAPORANGA,3170057
+Vale do Rio Doce,VARGEM ALEGRE,3170578
+Vale do Rio Doce,AIMORES,3101102
+Vale do Rio Doce,ALVARENGA,3102209
+Vale do Rio Doce,CONCEICAO DE IPANEMA,3117405
+Vale do Rio Doce,CONSELHEIRO PENA,3118403
+Vale do Rio Doce,CUPARAQUE,3120839
+Vale do Rio Doce,GOIABEIRA,3127370
+Vale do Rio Doce,IPANEMA,3131208
+Vale do Rio Doce,ITUETA,3134103
+Vale do Rio Doce,MUTUM,3144003
+Vale do Rio Doce,POCRANE,3151909
+Vale do Rio Doce,RESPLENDOR,3154309
+Vale do Rio Doce,SANTA RITA DO ITUETO,3159506
+Vale do Rio Doce,TAPARUBA,3168051
+Oeste de Minas,BAMBUI,3105103
+Oeste de Minas,CORREGO DANTA,3119807
+Oeste de Minas,DORESOPOLIS,3123403
+Oeste de Minas,IGUATAMA,3130309
+Oeste de Minas,MEDEIROS,3141306
+Oeste de Minas,PIUMHI,3151503
+Oeste de Minas,SAO ROQUE DE MINAS,3164308
+Oeste de Minas,TAPIRAI,3168200
+Oeste de Minas,VARGEM BONITA,3170602
+Oeste de Minas,CARMO DO CAJURU,3114204
+Oeste de Minas,CLAUDIO,3116605
+Oeste de Minas,CONCEICAO DO PARA,3117603
+Oeste de Minas,DIVINOPOLIS,3122306
+Oeste de Minas,IGARATINGA,3130200
+Oeste de Minas,ITAUNA,3133808
+Oeste de Minas,NOVA SERRANA,3145208
+Oeste de Minas,PERDIGAO,3149705
+Oeste de Minas,SANTO ANTONIO DO MONTE,3160405
+Oeste de Minas,SAO GONCALO DO PARA,3161809
+Oeste de Minas,SAO SEBASTIAO DO OESTE,3164605
+Oeste de Minas,ARCOS,3104205
+Oeste de Minas,CAMACHO,3110400
+Oeste de Minas,CORREGO FUNDO,3119955
+Oeste de Minas,FORMIGA,3126109
+Oeste de Minas,ITAPECERICA,3133501
+Oeste de Minas,PAINS,3146503
+Oeste de Minas,PEDRA DO INDAIA,3148905
+Oeste de Minas,PIMENTA,3150505
+Oeste de Minas,AGUANIL,3100807
+Oeste de Minas,CAMPO BELO,3111200
+Oeste de Minas,CANA VERDE,3111903
+Oeste de Minas,CANDEIAS,3112000
+Oeste de Minas,CRISTAIS,3120201
+Oeste de Minas,PERDOES,3149903
+Oeste de Minas,SANTANA DO JACARE,3158805
+Oeste de Minas,BOM SUCESSO,3108008
+Oeste de Minas,CARMO DA MATA,3114006
+Oeste de Minas,CARMOPOLIS DE MINAS,3114501
+Oeste de Minas,IBITURUNA,3130002
+Oeste de Minas,OLIVEIRA,3145604
+Oeste de Minas,PASSA TEMPO,3147709
+Oeste de Minas,PIRACEMA,3150604
+Oeste de Minas,SANTO ANTONIO DO AMPARO,3159902
+Oeste de Minas,SAO FRANCISCO DE PAULA,3161205
+Sul Sudoeste de Minas,ALPINOPOLIS,3101904
+Sul Sudoeste de Minas,BOM JESUS DA PENHA,3107604
+Sul Sudoeste de Minas,CAPETINGA,3112406
+Sul Sudoeste de Minas,CAPITOLIO,3112802
+Sul Sudoeste de Minas,CASSIA,3115102
+Sul Sudoeste de Minas,CLARAVAL,3116407
+Sul Sudoeste de Minas,DELFINOPOLIS,3121209
+Sul Sudoeste de Minas,FORTALEZA DE MINAS,3126307
+Sul Sudoeste de Minas,IBIRACI,3129707
+Sul Sudoeste de Minas,ITAU DE MINAS,3133758
+Sul Sudoeste de Minas,PASSOS,3147907
+Sul Sudoeste de Minas,PRATAPOLIS,3152907
+Sul Sudoeste de Minas,SAO JOAO BATISTA DO GLORIA,3162203
+Sul Sudoeste de Minas,SAO JOSE DA BARRA,3162948
+Sul Sudoeste de Minas,ARCEBURGO,3104106
+Sul Sudoeste de Minas,CABO VERDE,3109501
+Sul Sudoeste de Minas,GUARANESIA,3128303
+Sul Sudoeste de Minas,GUAXUPE,3128709
+Sul Sudoeste de Minas,ITAMOGI,3132909
+Sul Sudoeste de Minas,JACUI,3134806
+Sul Sudoeste de Minas,JURUAIA,3136900
+Sul Sudoeste de Minas,MONTE BELO,3143005
+Sul Sudoeste de Minas,MONTE SANTO DE MINAS,3143203
+Sul Sudoeste de Minas,MUZAMBINHO,3144102
+Sul Sudoeste de Minas,NOVA RESENDE,3145109
+Sul Sudoeste de Minas,SAO PEDRO DA UNIAO,3163904
+Sul Sudoeste de Minas,SAO SEBASTIAO DO PARAISO,3164704
+Sul Sudoeste de Minas,SAO TOMAS DE AQUINO,3165107
+Sul Sudoeste de Minas,ALFENAS,3101607
+Sul Sudoeste de Minas,ALTEROSA,3102001
+Sul Sudoeste de Minas,AREADO,3104304
+Sul Sudoeste de Minas,CARMO DO RIO CLARO,3114402
+Sul Sudoeste de Minas,CARVALHOPOLIS,3114709
+Sul Sudoeste de Minas,CONCEICAO DA APARECIDA,3117108
+Sul Sudoeste de Minas,DIVISA NOVA,3122405
+Sul Sudoeste de Minas,FAMA,3125200
+Sul Sudoeste de Minas,MACHADO,3139003
+Sul Sudoeste de Minas,PARAGUACU,3147204
+Sul Sudoeste de Minas,POCO FUNDO,3151701
+Sul Sudoeste de Minas,SERRANIA,3166907
+Sul Sudoeste de Minas,BOA ESPERANCA,3107109
+Sul Sudoeste de Minas,CAMPANHA,3110905
+Sul Sudoeste de Minas,CAMPO DO MEIO,3111309
+Sul Sudoeste de Minas,CAMPOS GERAIS,3111606
+Sul Sudoeste de Minas,CARMO DA CACHOEIRA,3113909
+Sul Sudoeste de Minas,COQUEIRAL,3118700
+Sul Sudoeste de Minas,ELOI MENDES,3123601
+Sul Sudoeste de Minas,GUAPE,3128105
+Sul Sudoeste de Minas,ILICINEA,3130507
+Sul Sudoeste de Minas,MONSENHOR PAULO,3142601
+Sul Sudoeste de Minas,SANTANA DA VARGEM,3158300
+Sul Sudoeste de Minas,SAO BENTO ABADE,3160801
+Sul Sudoeste de Minas,SAO TOME DAS LETRAS,3165206
+Sul Sudoeste de Minas,TRES CORACOES,3169307
+Sul Sudoeste de Minas,TRES PONTAS,3169406
+Sul Sudoeste de Minas,VARGINHA,3170701
+Sul Sudoeste de Minas,ALBERTINA,3101409
+Sul Sudoeste de Minas,ANDRADAS,3102605
+Sul Sudoeste de Minas,BANDEIRA DO SUL,3105301
+Sul Sudoeste de Minas,BOTELHOS,3108404
+Sul Sudoeste de Minas,CALDAS,3110301
+Sul Sudoeste de Minas,CAMPESTRE,3111002
+Sul Sudoeste de Minas,IBITIURA DE MINAS,3129905
+Sul Sudoeste de Minas,INCONFIDENTES,3130606
+Sul Sudoeste de Minas,JACUTINGA,3134905
+Sul Sudoeste de Minas,MONTE SIAO,3143401
+Sul Sudoeste de Minas,OURO FINO,3146008
+Sul Sudoeste de Minas,POCOS DE CALDAS,3151800
+Sul Sudoeste de Minas,SANTA RITA DE CALDAS,3159209
+Sul Sudoeste de Minas,BOM REPOUSO,3107901
+Sul Sudoeste de Minas,BORDA DA MATA,3108305
+Sul Sudoeste de Minas,BUENO BRANDAO,3109105
+Sul Sudoeste de Minas,CAMANDUCAIA,3110509
+Sul Sudoeste de Minas,CAMBUI,3110608
+Sul Sudoeste de Minas,CONGONHAL,3117900
+Sul Sudoeste de Minas,CORREGO DO BOM JESUS,3119906
+Sul Sudoeste de Minas,ESPIRITO SANTO DO DOURADO,3124401
+Sul Sudoeste de Minas,ESTIVA,3124500
+Sul Sudoeste de Minas,EXTREMA,3125101
+Sul Sudoeste de Minas,GONCALVES,3127404
+Sul Sudoeste de Minas,IPUIUNA,3131505
+Sul Sudoeste de Minas,ITAPEVA,3133600
+Sul Sudoeste de Minas,MUNHOZ,3143807
+Sul Sudoeste de Minas,POUSO ALEGRE,3152501
+Sul Sudoeste de Minas,SAPUCAI MIRIM,3165404
+Sul Sudoeste de Minas,SENADOR AMARAL,3165578
+Sul Sudoeste de Minas,SENADOR JOSE BENTO,3165800
+Sul Sudoeste de Minas,TOCOS DO MOJI,3169059
+Sul Sudoeste de Minas,TOLEDO,3169109
+Sul Sudoeste de Minas,CACHOEIRA DE MINAS,3109709
+Sul Sudoeste de Minas,CAREACU,3113602
+Sul Sudoeste de Minas,CONCEICAO DAS PEDRAS,3117207
+Sul Sudoeste de Minas,CONCEICAO DOS OUROS,3117801
+Sul Sudoeste de Minas,CORDISLANDIA,3119005
+Sul Sudoeste de Minas,HELIODORA,3129202
+Sul Sudoeste de Minas,NATERCIA,3144409
+Sul Sudoeste de Minas,PEDRALVA,3149101
+Sul Sudoeste de Minas,SANTA RITA DO SAPUCAI,3159605
+Sul Sudoeste de Minas,SAO GONCALO DO SAPUCAI,3162005
+Sul Sudoeste de Minas,SAO JOAO DA MATA,3162302
+Sul Sudoeste de Minas,SAO JOSE DO ALEGRE,3163201
+Sul Sudoeste de Minas,SAO SEBASTIAO DA BELA VISTA,3164407
+Sul Sudoeste de Minas,SILVIANOPOLIS,3167400
+Sul Sudoeste de Minas,TURVOLANDIA,3169802
+Sul Sudoeste de Minas,ALAGOA,3101300
+Sul Sudoeste de Minas,BAEPENDI,3104908
+Sul Sudoeste de Minas,CAMBUQUIRA,3110707
+Sul Sudoeste de Minas,CARMO DE MINAS,3114105
+Sul Sudoeste de Minas,CAXAMBU,3115508
+Sul Sudoeste de Minas,CONCEICAO DO RIO VERDE,3117702
+Sul Sudoeste de Minas,ITAMONTE,3133006
+Sul Sudoeste de Minas,ITANHANDU,3133105
+Sul Sudoeste de Minas,JESUANIA,3135902
+Sul Sudoeste de Minas,LAMBARI,3137809
+Sul Sudoeste de Minas,OLIMPIO NORONHA,3145505
+Sul Sudoeste de Minas,PASSA QUATRO,3147600
+Sul Sudoeste de Minas,POUSO ALTO,3152600
+Sul Sudoeste de Minas,SAO LOURENCO,3163706
+Sul Sudoeste de Minas,SAO SEBASTIAO DO RIO VERDE,3164902
+Sul Sudoeste de Minas,SOLEDADE DE MINAS,3167806
+Sul Sudoeste de Minas,AIURUOCA,3101201
+Sul Sudoeste de Minas,ANDRELANDIA,3102803
+Sul Sudoeste de Minas,ARANTINA,3103603
+Sul Sudoeste de Minas,BOCAINA DE MINAS,3107208
+Sul Sudoeste de Minas,BOM JARDIM DE MINAS,3107505
+Sul Sudoeste de Minas,CARVALHOS,3114808
+Sul Sudoeste de Minas,CRUZILIA,3120805
+Sul Sudoeste de Minas,LIBERDADE,3138500
+Sul Sudoeste de Minas,MINDURI,3141900
+Sul Sudoeste de Minas,PASSA VINTE,3147808
+Sul Sudoeste de Minas,SAO VICENTE DE MINAS,3165305
+Sul Sudoeste de Minas,SERITINGA,3166402
+Sul Sudoeste de Minas,SERRANOS,3167004
+Sul Sudoeste de Minas,BRAZOPOLIS,3108909
+Sul Sudoeste de Minas,CONSOLACAO,3118502
+Sul Sudoeste de Minas,CRISTINA,3120508
+Sul Sudoeste de Minas,DELFIM MOREIRA,3121100
+Sul Sudoeste de Minas,DOM VICOSO,3122801
+Sul Sudoeste de Minas,ITAJUBA,3132404
+Sul Sudoeste de Minas,MARIA DA FE,3139904
+Sul Sudoeste de Minas,MARMELOPOLIS,3140407
+Sul Sudoeste de Minas,PARAISOPOLIS,3147303
+Sul Sudoeste de Minas,PIRANGUCU,3150901
+Sul Sudoeste de Minas,PIRANGUINHO,3151008
+Sul Sudoeste de Minas,WENCESLAU BRAZ,3172202
+Sul Sudoeste de Minas,VIRGINIA,3171709
+Campo das Vertentes,CARRANCAS,3114600
+Campo das Vertentes,IJACI,3130408
+Campo das Vertentes,INGAI,3130804
+Campo das Vertentes,ITUMIRIM,3134301
+Campo das Vertentes,ITUTINGA,3134509
+Campo das Vertentes,LAVRAS,3138203
+Campo das Vertentes,LUMINARIAS,3138708
+Campo das Vertentes,NEPOMUCENO,3144607
+Campo das Vertentes,RIBEIRAO VERMELHO,3154705
+Campo das Vertentes,CONCEICAO DA BARRA DE MINAS,3115201
+Campo das Vertentes,CORONEL XAVIER CHAVES,3119708
+Campo das Vertentes,DORES DE CAMPOS,3123007
+Campo das Vertentes,LAGOA DOURADA,3137403
+Campo das Vertentes,MADRE DE DEUS DE MINAS,3139102
+Campo das Vertentes,NAZARENO,3144508
+Campo das Vertentes,PIEDADE DO RIO GRANDE,3150307
+Campo das Vertentes,PRADOS,3152709
+Campo das Vertentes,RESENDE COSTA,3154200
+Campo das Vertentes,RITAPOLIS,3156106
+Campo das Vertentes,SANTA CRUZ DE MINAS,3157336
+Campo das Vertentes,SANTANA DO GARAMBEU,3158706
+Campo das Vertentes,SAO JOAO DEL REI,3162500
+Campo das Vertentes,SAO TIAGO,3165008
+Campo das Vertentes,TIRADENTES,3168804
+Campo das Vertentes,ALFREDO VASCONCELOS,3101631
+Campo das Vertentes,ANTONIO CARLOS,3102902
+Campo das Vertentes,BARBACENA,3105608
+Campo das Vertentes,BARROSO,3105905
+Campo das Vertentes,CAPELA NOVA,3112208
+Campo das Vertentes,CARANAIBA,3113107
+Campo das Vertentes,CARANDAI,3113206
+Campo das Vertentes,DESTERRO DO MELO,3121506
+Campo das Vertentes,IBERTIOGA,3129400
+Campo das Vertentes,RESSAQUINHA,3154408
+Campo das Vertentes,SANTA BARBARA DO TUGURIO,3157302
+Campo das Vertentes,SENHORA DOS REMEDIOS,3166204
+Zona da Mata,ACAIACA,3100401
+Zona da Mata,BARRA LONGA,3105707
+Zona da Mata,DOM SILVERIO,3122702
+Zona da Mata,GUARACIABA,3128204
+Zona da Mata,JEQUERI,3135506
+Zona da Mata,ORATORIOS,3145851
+Zona da Mata,PIEDADE DE PONTE NOVA,3150208
+Zona da Mata,PONTE NOVA,3152105
+Zona da Mata,RAUL SOARES,3154002
+Zona da Mata,RIO CASCA,3154903
+Zona da Mata,RIO DOCE,3155009
+Zona da Mata,SANTA CRUZ DO ESCALVADO,3157401
+Zona da Mata,SANTO ANTONIO DO GRAMA,3160108
+Zona da Mata,SAO PEDRO DOS FERROS,3164001
+Zona da Mata,SEM PEIXE,3165560
+Zona da Mata,SERICITA,3166303
+Zona da Mata,URUCANIA,3170503
+Zona da Mata,VERMELHO NOVO,3171154
+Zona da Mata,ABRE CAMPO,3100302
+Zona da Mata,ALTO CAPARAO,3102050
+Zona da Mata,ALTO JEQUITIBA,3153509
+Zona da Mata,CAPARAO,3112109
+Zona da Mata,CAPUTIRA,3112901
+Zona da Mata,CHALE,3116001
+Zona da Mata,DURANDE,3123528
+Zona da Mata,LAJINHA,3137700
+Zona da Mata,LUISBURGO,3138674
+Zona da Mata,MANHUACU,3139409
+Zona da Mata,MANHUMIRIM,3139508
+Zona da Mata,MARTINS SOARES,3140530
+Zona da Mata,MATIPO,3140902
+Zona da Mata,PEDRA BONITA,3148756
+Zona da Mata,REDUTO,3154150
+Zona da Mata,SANTA BARBARA DO LESTE,3157252
+Zona da Mata,SANTA MARGARIDA,3157906
+Zona da Mata,SANTANA DO MANHUACU,3158904
+Zona da Mata,SAO JOAO DO MANHUACU,3162559
+Zona da Mata,SAO JOSE DO MANTIMENTO,3163607
+Zona da Mata,SIMONESIA,3167608
+Zona da Mata,ALTO RIO DOCE,3102100
+Zona da Mata,AMPARO DO SERRA,3102506
+Zona da Mata,ARAPONGA,3103702
+Zona da Mata,BRAS PIRES,3108701
+Zona da Mata,CAJURI,3110202
+Zona da Mata,CANAA,3111705
+Zona da Mata,CIPOTANEA,3116308
+Zona da Mata,COIMBRA,3116704
+Zona da Mata,ERVALIA,3124005
+Zona da Mata,LAMIM,3137908
+Zona da Mata,PAULA CANDIDO,3148301
+Zona da Mata,PEDRA DO ANTA,3148806
+Zona da Mata,PIRANGA,3150802
+Zona da Mata,PORTO FIRME,3152303
+Zona da Mata,PRESIDENTE BERNARDES,3153103
+Zona da Mata,RIO ESPERA,3155207
+Zona da Mata,SAO MIGUEL DO ANTA,3163805
+Zona da Mata,SENHORA DE OLIVEIRA,3166006
+Zona da Mata,TEIXEIRAS,3168507
+Zona da Mata,VICOSA,3171303
+Zona da Mata,ANTONIO PRADO DE MINAS,3103108
+Zona da Mata,BARAO DO MONTE ALTO,3105509
+Zona da Mata,CAIANA,3110103
+Zona da Mata,CARANGOLA,3113305
+Zona da Mata,DIVINO,3122009
+Zona da Mata,ESPERA FELIZ,3124203
+Zona da Mata,EUGENOPOLIS,3124906
+Zona da Mata,FARIA LEMOS,3125309
+Zona da Mata,FERVEDOURO,3125952
+Zona da Mata,MIRADOURO,3142106
+Zona da Mata,MIRAI,3142205
+Zona da Mata,MURIAE,3143906
+Zona da Mata,ORIZANIA,3145877
+Zona da Mata,PATROCINIO DO MURIAE,3148202
+Zona da Mata,PEDRA DOURADA,3149002
+Zona da Mata,ROSARIO DA LIMEIRA,3156452
+Zona da Mata,SAO FRANCISCO DO GLORIA,3161403
+Zona da Mata,SAO SEBASTIAO DA VARGEM ALEGRE,3164431
+Zona da Mata,TOMBOS,3169208
+Zona da Mata,VIEIRAS,3171402
+Zona da Mata,ASTOLFO DUTRA,3104601
+Zona da Mata,DIVINESIA,3121902
+Zona da Mata,DORES DO TURVO,3123304
+Zona da Mata,GUARANI,3128402
+Zona da Mata,GUIDOVAL,3128808
+Zona da Mata,GUIRICEMA,3129004
+Zona da Mata,MERCES,3141603
+Zona da Mata,PIRAUBA,3151305
+Zona da Mata,RIO POMBA,3155801
+Zona da Mata,RODEIRO,3156304
+Zona da Mata,SAO GERALDO,3161502
+Zona da Mata,SENADOR FIRMINO,3165701
+Zona da Mata,SILVEIRANIA,3167301
+Zona da Mata,TABULEIRO,3167905
+Zona da Mata,TOCANTINS,3169000
+Zona da Mata,UBA,3169901
+Zona da Mata,VISCONDE DO RIO BRANCO,3172004
+Zona da Mata,ARACITABA,3103306
+Zona da Mata,BELMIRO BRAGA,3106101
+Zona da Mata,BIAS FORTES,3106804
+Zona da Mata,BICAS,3106903
+Zona da Mata,CHACARA,3115904
+Zona da Mata,CHIADOR,3116209
+Zona da Mata,CORONEL PACHECO,3119609
+Zona da Mata,DESCOBERTO,3121308
+Zona da Mata,EWBANK DA CAMARA,3125002
+Zona da Mata,GOIANA,3127388
+Zona da Mata,GUARARA,3128501
+Zona da Mata,JUIZ DE FORA,3136702
+Zona da Mata,LIMA DUARTE,3138609
+Zona da Mata,MAR DE ESPANHA,3139805
+Zona da Mata,MARIPA DE MINAS,3140209
+Zona da Mata,MATIAS BARBOSA,3140803
+Zona da Mata,OLARIA,3145406
+Zona da Mata,OLIVEIRA FORTES,3145703
+Zona da Mata,PAIVA,3146602
+Zona da Mata,PEDRO TEIXEIRA,3149408
+Zona da Mata,PEQUERI,3149507
+Zona da Mata,PIAU,3150109
+Zona da Mata,RIO NOVO,3155405
+Zona da Mata,RIO PRETO,3155900
+Zona da Mata,ROCHEDO DE MINAS,3156205
+Zona da Mata,SANTA BARBARA DO MONTE VERDE,3157278
+Zona da Mata,SANTA RITA DE IBITIPOCA,3159407
+Zona da Mata,SANTA RITA DE JACUTINGA,3159308
+Zona da Mata,SANTANA DO DESERTO,3158607
+Zona da Mata,SANTOS DUMONT,3160702
+Zona da Mata,SAO JOAO NEPOMUCENO,3162906
+Zona da Mata,SENADOR CORTES,3165602
+Zona da Mata,SIMAO PEREIRA,3167509
+Zona da Mata,ALEM PARAIBA,3101508
+Zona da Mata,ARGIRITA,3104403
+Zona da Mata,CATAGUASES,3115300
+Zona da Mata,DONA EUZEBIA,3122900
+Zona da Mata,ESTRELA DALVA,3124609
+Zona da Mata,ITAMARATI DE MINAS,3132602
+Zona da Mata,LARANJAL,3138005
+Zona da Mata,LEOPOLDINA,3138401
+Zona da Mata,PALMA,3146701
+Zona da Mata,PIRAPETINGA,3151107
+Zona da Mata,RECREIO,3154101
+Zona da Mata,SANTANA DE CATAGUASES,3158409
+Zona da Mata,SANTO ANTONIO DO AVENTUREIRO,3160009
+Zona da Mata,VOLTA GRANDE,3172103

@@ -1,0 +1,129 @@
+---
+title: "Síntese: cânceres ginecológicos no IMP/Hospital Luxemburgo"
+subtitle: "Pacientes atendidas pelo SUS, 2019-2024"
+lang: pt-BR
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+source("funcoes_padrao.R", encoding = "UTF-8")
+
+pasta_saida <- file.path("..", "saidas", "sintese")
+
+ids   <- c("vulva", "colo_utero", "endometrio", "ovario")
+nomes <- c(vulva = "Vulva", colo_utero = "Colo do útero", endometrio = "Endométrio (corpo do útero)", ovario = "Ovário")
+arquivos <- file.path("..", "saidas", ids, paste0("resumo_", ids, ".csv"))
+if (!all(file.exists(arquivos))) {
+  stop("Faltam resumos. Knite antes os Rmd destes cânceres: ",
+       paste(ids[!file.exists(arquivos)], collapse = ", "), call. = FALSE)
+}
+resumo <- map_dfr(arquivos, read_csv, show_col_types = FALSE) %>%
+  mutate(nome = nomes[cancer])
+```
+
+# 1. Coorte
+
+```{r coorte}
+resumo %>%
+  transmute(
+    `Câncer` = nome,
+    `Registros no arquivo` = fmt_n(n_arquivo),
+    `Sem tratamento anterior` = fmt_n(n_diagant12),
+    `Tratadas no hospital` = fmt_n(n_trat_hosp),
+    `Residentes em MG` = fmt_n(n_mg),
+    `Na janela de datas` = fmt_n(n_trat_janela),
+    `Coorte final` = fmt_n(n_final),
+    `Idade mediana` = fmt_num(idade_mediana, 0)
+  ) %>%
+  tabela_kable("Coorte por tipo de câncer", arquivo = "coorte",
+            notas = paste0("Filtro SUS: ", ifelse(apenas_sus, "ligado", "desligado"),
+                           ". Idade na primeira consulta."))
+```
+
+# 2. Lei 12.732/2012
+
+```{r prazo}
+prazo <- resumo %>%
+  rowwise() %>%
+  mutate(ic = list(prop.test(n_ate60, n_final, correct = FALSE)$conf.int)) %>%
+  ungroup() %>%
+  mutate(pct = 100 * n_ate60 / n_final, lo = 100 * map_dbl(ic, 1), hi = 100 * map_dbl(ic, 2))
+
+prazo %>%
+  transmute(
+    `Câncer` = nome, N = fmt_n(n_final),
+    `Tratadas em até 60 dias` = fmt_n(n_ate60),
+    `% (IC 95%)` = paste0(fmt_num(pct), "% (", fmt_num(lo), "-", fmt_num(hi), ")"),
+    `Mediana de dias` = fmt_num(dias_med, 0)
+  ) %>%
+  tabela_kable("Tratamento iniciado em até 60 dias do diagnóstico", arquivo = "prazo",
+            notas = "IC 95% de Wilson. Intervalos negativos (tratamento antes do laudo) contam como dentro do prazo.")
+
+grafico_prazo <- ggplot(prazo, aes(x = reorder(nome, pct), y = pct)) +
+  geom_col(fill = cor_secundaria, width = 0.65) +
+  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.2, color = cor_texto) +
+  geom_text(aes(y = hi, label = paste0(fmt_num(pct, 0), "%")), vjust = -0.5, size = 3.4) +
+  scale_y_continuous(limits = c(0, 105), expand = c(0, 0)) +
+  labs(title = "Pacientes tratadas em até 60 dias do diagnóstico",
+       x = NULL, y = "%", caption = nota_grafico("Barras de erro = IC 95% de Wilson"))
+salvar_figura(grafico_prazo, "prazo_por_cancer", altura = 4.5)
+grafico_prazo
+```
+
+# 3. Sobrevida global
+
+```{r sobrevida}
+resumo %>%
+  transmute(
+    `Câncer` = nome,
+    `Óbitos até a censura` = ifelse(celula_pequena(obitos_ate_corte), paste0("<", min_celula), fmt_n(obitos_ate_corte)),
+    `12 meses` = fmt_pct(100 * s12), `36 meses` = fmt_pct(100 * s36), `60 meses` = fmt_pct(100 * s60),
+    `Mediana (meses)` = ifelse(is.na(km_mediana_meses), "Não atingida", fmt_num(km_mediana_meses))
+  ) %>%
+  tabela_kable("Sobrevida global (Kaplan-Meier)", arquivo = "sobrevida",
+               notas = paste0("Censura administrativa em ", format(data_corte, "%d/%m/%Y"),
+                              ". Coortes pequenas geram estimativas imprecisas; veja os IC no relatório de cada câncer."))
+
+grafico_sobrevida <- resumo %>%
+  select(nome, s12, s36, s60) %>%
+  pivot_longer(c(s12, s36, s60), names_to = "meses", values_to = "surv") %>%
+  mutate(meses = as.integer(str_remove(meses, "s"))) %>%
+  filter(!is.na(surv)) %>%
+  ggplot(aes(x = meses, y = surv, color = nome)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.2) +
+  scale_color_manual(values = paleta) +
+  scale_x_continuous(breaks = c(12, 36, 60)) +
+  scale_y_continuous(limits = c(0, 1), labels = function(x) paste0(100 * x, "%")) +
+  labs(title = "Sobrevida global em 12, 36 e 60 meses",
+       x = "Meses desde o diagnóstico", y = "Sobrevida global", color = NULL, caption = nota_grafico("Estimativas de Kaplan-Meier"))
+salvar_figura(grafico_sobrevida, "sobrevida_por_cancer", altura = 4.5)
+grafico_sobrevida
+```
+
+# 4. Painel de síntese
+
+```{r painel_sintese, fig.width = 13, fig.height = 5}
+painel(list(grafico_prazo, grafico_sobrevida), "painel_sintese",
+       titulo = "Cânceres ginecológicos no IMP: prazo da Lei 12.732 e sobrevida", altura = 5)
+```
+
+# Arquivos exportados
+
+Tudo o que aparece neste relatório foi gravado em `saidas/sintese/`. Os relatórios de cada câncer gravam os seus em `saidas/<câncer>/`.
+
+```{r exportar}
+exportar_tudo() %>%
+  tabela_kable("Arquivos exportados", subtitulo = "Pasta de cada tipo de arquivo e quantidade")
+```
+
+# Informações da sessão
+
+```{r sessao}
+sessionInfo()
+```

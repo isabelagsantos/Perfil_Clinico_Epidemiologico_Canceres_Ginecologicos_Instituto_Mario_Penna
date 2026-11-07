@@ -1,0 +1,13 @@
+# Dados de pacientes: NUNCA subir para o GitHub (LGPD)
+dados/*.xlsx
+dados/*.xls
+
+# Arquivos temporários do R
+.Rproj.user/
+.Rhistory
+.RData
+*_cache/
+*_files/
+
+# Resumos numéricos sem ocultar células pequenas (só para conferência interna)
+saidas/*/resumo_*.csv

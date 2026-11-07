@@ -1,0 +1,11 @@
+Coloque nesta pasta os quatro arquivos exportados do RHC (NAO sobem para o GitHub: dados de pacientes):
+
+  rhc_imp_vulva_2019_2024.xlsx
+  rhc_imp_colo_uterino_2019_2024.xlsx
+  rhc_imp_endometrio_2019_2024.xlsx
+  rhc_imp_ovario_2019_2024.xlsx
+
+Ja estao aqui (arquivos publicos de referencia):
+
+  municipios_mg_mesorregioes_codigo_ibge_2025.csv   municipio -> mesorregiao (IBGE)
+  dtb_municipios.csv                                nomes oficiais dos municipios (DTB/IBGE)

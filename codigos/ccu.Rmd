@@ -1,0 +1,848 @@
+---
+title: "Perfil epidemiológico do câncer de colo do útero"
+subtitle: "IMP/Hospital Luxemburgo (CACON) - pacientes atendidas pelo SUS, 2019-2024"
+lang: pt-BR
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+```{r}
+# Opções gerais: mostra o código e esconde avisos e mensagens no relatório
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+# Funções, rótulos do INCA e visual padrão (compartilhados pelos 4 Rmd)
+source("funcoes_padrao.R", encoding = "UTF-8")
+
+# ==============================================================================
+# CONFIGURAÇÃO DESTE CÂNCER
+# Este é o único bloco que muda de um Rmd para outro.
+# ==============================================================================
+id_cancer       <- "colo_utero"
+nome_cancer     <- "colo do útero"                    # usado em títulos de gráficos
+prefixo         <- "PCU"                 # código da paciente: PCU 001, PCU 002...
+arquivo_rhc     <- "rhc_imp_colo_uterino_2019_2024.xlsx"
+padrao_arquivo  <- "colo.*\\.xlsx$"                  # ajuda a achar o arquivo se o nome for um pouco diferente
+gd_esperado     <- "C53"                      # grupo CID-10 esperado (GDGRUPO)
+loc_esperadas   <- c("C53.0", "C53.1", "C53.8", "C53.9")          # localizações primárias esperadas (LOCTUPRI)
+codigos_revisar <- c()                # códigos histológicos incomuns para o sítio (conferir no prontuário)
+
+# Localização do tumor primário (CID-10)
+rotulos_local <- c(
+  "C53.0" = "Neoplasia maligna do colo do útero, endocérvice (C53.0)",
+  "C53.1" = "Neoplasia maligna do colo do útero, exocérvice (C53.1)",
+  "C53.8" = "Neoplasia maligna do colo do útero com lesão invasiva (C53.8)",
+  "C53.9" = "Neoplasia maligna do colo do útero, não especificado (C53.9)"
+)
+
+# Tipo histológico (CID-O-3: morfologia/comportamento)
+rotulos_hist <- c(
+  "8000/3" = "Neoplasia maligna SOE (8000/3)",
+  "8010/2" = "Carcinoma in situ SOE (8010/2)",
+  "8010/3" = "Carcinoma SOE (8010/3)",
+  "8020/3" = "Carcinoma indiferenciado SOE (8020/3)",
+  "8041/3" = "Carcinoma de pequenas células SOE (8041/3)",
+  "8050/3" = "Carcinoma papilar SOE (8050/3)",
+  "8070/2" = "Carcinoma epidermoide in situ SOE (8070/2)",
+  "8070/3" = "Carcinoma epidermoide SOE (8070/3)",
+  "8071/3" = "Carcinoma epidermoide ceratinizante SOE (8071/3)",
+  "8072/3" = "Carcinoma epidermoide de grandes células, não ceratinizante SOE (8072/3)",
+  "8074/3" = "Carcinoma epidermoide de células fusiformes (8074/3)",
+  "8077/2" = "Neoplasia intraepitelial escamosa, grau III (NIC III / NIV III) (8077/2)",
+  "8083/3" = "Carcinoma epidermoide basaloide (8083/3)",
+  "8140/2" = "Adenocarcinoma in situ SOE (8140/2)",
+  "8140/3" = "Adenocarcinoma SOE (8140/3)",
+  "8246/3" = "Carcinoma neuroendócrino SOE (8246/3)",
+  "8255/3" = "Adenocarcinoma com subtipos mistos (8255/3)",
+  "8263/3" = "Adenocarcinoma em adenoma tubuloviloso (8263/3)",
+  "8310/3" = "Adenocarcinoma de células claras SOE (8310/3)",
+  "8323/3" = "Adenocarcinoma de tipo celular misto (8323/3)",
+  "8384/3" = "Adenocarcinoma de tipo endocervical (8384/3)",
+  "8480/3" = "Adenocarcinoma mucinoso (8480/3)",
+  "8481/3" = "Adenocarcinoma produtor de mucina (8481/3)",
+  "8560/3" = "Carcinoma adenoescamoso (8560/3)",
+  "8800/3" = "Sarcoma SOE (8800/3)",
+  "8802/3" = "Sarcoma de células gigantes (8802/3)",
+  "8890/3" = "Leiomiossarcoma SOE (8890/3)",
+  "8950/3" = "Tumor misto mülleriano (8950/3)",
+  "8963/3" = "Tumor rabdoide maligno (8963/3)",
+  "8980/3" = "Carcinossarcoma SOE (8980/3)"
+)
+
+# Causa básica da morte (CID-10)
+rotulos_causa <- c(
+  "B21.8" = "Doença pelo HIV resultando em outras neoplasias malignas (B21.8)",
+  "B34.2" = "Infecção por coronavírus de localização não especificada (B34.2)",
+  "C10.9" = "Neoplasia maligna da orofaringe, não especificada (C10.9)",
+  "C19.X" = "Neoplasia maligna da junção retossigmoide (C19.X)",
+  "C50.3" = "Neoplasia maligna da mama, quadrante inferior interno (C50.3)",
+  "C53.0" = "Neoplasia maligna do colo do útero, endocérvice (C53.0)",
+  "C53.9" = "Neoplasia maligna do colo do útero, não especificado (C53.9)"
+)
+# ==============================================================================
+
+pasta_saida <- file.path("..", "saidas", id_cancer)   # tabelas e figuras são gravadas aqui
+```
+
+# Parâmetros da análise
+
+```{r}
+# Tabela com os parâmetros em vigor (definidos em funcoes_padrao.R), para registrar como a análise foi feita
+tibble(
+  Parâmetro = c("Janela (diagnóstico e início do tratamento)", "Residência", "Prazo da Lei 12.732/2012",
+                "Apenas tratamento custeado pelo SUS", "Apenas casos analíticos", "Data de censura da sobrevida",
+                "Células com menos de N pacientes ocultas"),
+  Valor = c(paste(format(janela_inicio, "%d/%m/%Y"), "a", format(janela_fim, "%d/%m/%Y")), uf_residencia,
+            paste(prazo_lei, "dias"), ifelse(apenas_sus, "Sim", "Não"), ifelse(apenas_analiticos, "Sim", "Não"),
+            format(data_corte, "%d/%m/%Y"), ifelse(min_celula > 0, as.character(min_celula), "Desligado"))
+) %>%
+  tabela_kable("Parâmetros desta análise", arquivo = "parametros",
+            notas = "Para alterar, edite a seção 1 do arquivo funcoes_padrao.R.")
+```
+
+# 1. Dados
+
+## 1.1 Leitura e limpeza
+
+```{r}
+# Lê o arquivo do RHC (procurando em dados/) e confere se todas as colunas necessárias existem
+arq_rhc <- achar_arquivo(arquivo_rhc, padrao_arquivo)
+bruto <- readxl::read_excel(arq_rhc, col_types = "text")   # tudo como texto
+
+# Tira espaços extras e troca os "vazios" do RHC (vazio, "." e data em branco) por NA
+bruto <- bruto %>%
+  mutate(across(everything(), ~ na_if(na_if(na_if(str_squish(.x), ""), "."), "/ /")))
+
+# Confere se todas as colunas usadas existem
+colunas_necessarias <- c("IDADE", "RACACOR", "INSTRUC", "PROCEDEN", "UF", "DTDIAGNO", "DIAGANT", "BASMAIMP",
+                         "LOCTUPRI", "GDGRUPO", "TIPOHIST", "ESTADIAM", "DTINITRT", "PRITRATH", "ESTDFIMT",
+                         "DTOBITO", "OBITOPORCANCER", "ESTCONAT", "HISTFAMC", "ALCOOLIS", "TABAGISM", "ORIGENCA",
+                         "EXMRELE1", "CUSTDIAGTUMOR", "CUSTRATAMTUMOR", "CAUBAMOR", "SEXO", "ANALITIC",
+                         "CLASSIF", "MAISUMTU")
+faltam <- setdiff(colunas_necessarias, names(bruto))
+if (length(faltam) > 0) stop("Colunas ausentes no arquivo do RHC: ", paste(faltam, collapse = ", "))
+
+nrow(bruto)   # pacientes no arquivo
+```
+
+## 1.2 Renomeando as colunas
+
+```{r}
+# Dá nomes curtos e legíveis às colunas do RHC e cria o código da paciente
+# O código da paciente (ex.: PCV 001) é dado ANTES de qualquer filtro, na ordem do arquivo.
+dados <- bruto %>%
+  mutate(codigo = paste0(prefixo, " ", str_pad(row_number(), width = 3, pad = "0"))) %>%
+  select(
+    codigo,
+    idade = IDADE, raca = RACACOR, escol = INSTRUC, cidade_ibge = PROCEDEN, uf = UF,
+    dt_diag = DTDIAGNO, diag_trat = DIAGANT, base_impor = BASMAIMP,
+    loc_tumor = LOCTUPRI, gd_grupo = GDGRUPO, tipo_hist = TIPOHIST, estadiam = ESTADIAM,
+    dt_trat = DTINITRT, trat_hosp = PRITRATH, est_df_hosp = ESTDFIMT,
+    dt_obito = DTOBITO, obito_canc = OBITOPORCANCER, est_civil = ESTCONAT, hist_fam = HISTFAMC,
+    alcool = ALCOOLIS, tabaco = TABAGISM, orig_encam = ORIGENCA, exames_rel = EXMRELE1,
+    cust_diag = CUSTDIAGTUMOR, cust_trat = CUSTRATAMTUMOR, causa_obito = CAUBAMOR,
+    sexo = SEXO, analitico = ANALITIC, classif = CLASSIF, mais_um_tumor = MAISUMTU
+  ) %>%
+  mutate(idade = as.numeric(idade),
+         idade = na_if(idade, 999))   # INCA, item 8: 999 = idade não disponível
+```
+
+## 1.3 Exames relevantes (um campo com 7 posições vira 7 colunas)
+
+```{r}
+# Separa o campo de exames (7 posições) em 7 colunas, uma para cada tipo de exame
+# INCA, item 48: 1 clínico/patologia clínica, 2 imagem, 3 endoscopia/cirurgia exploradora,
+# 4 anatomia patológica, 5 marcadores tumorais, 8 não se aplica, 9 sem informação
+n_exames_fora_do_padrao <- sum(nchar(str_remove_all(dados$exames_rel, " ")) != 7, na.rm = TRUE)
+
+dados <- dados %>%
+  mutate(exames_sem_espaco = str_remove_all(exames_rel, " ")) %>%
+  mutate(
+    exame_clinpato    = as.integer(substr(exames_sem_espaco, 1, 1)),
+    exames_imag       = as.integer(substr(exames_sem_espaco, 2, 2)),
+    endos_cirur       = as.integer(substr(exames_sem_espaco, 3, 3)),
+    anatopato         = as.integer(substr(exames_sem_espaco, 4, 4)),
+    marc_tumor        = as.integer(substr(exames_sem_espaco, 5, 5)),
+    exames_nao_aplica = as.integer(substr(exames_sem_espaco, 6, 6)),
+    exames_sem_info   = as.integer(substr(exames_sem_espaco, 7, 7))
+  ) %>%
+  select(-exames_rel, -exames_sem_espaco)
+```
+
+## 1.4 Datas
+
+```{r}
+# Converte as datas de texto (dd/mm/aaaa) para data e marca os casos especiais do INCA
+# INCA (itens 22, 32 e 36): data incompleta usa dia 15 (dia desconhecido) ou 30/06 (dia e mês
+# desconhecidos); 99/99/9999 = data desconhecida; 88/88/8888 em DTINITRT = NÃO tratou no hospital.
+dados <- dados %>%
+  mutate(
+    sem_trat_hosp  = dt_trat %in% "88/88/8888",
+    data_desconhecida = dt_diag %in% "99/99/9999" | dt_trat %in% "99/99/9999" | dt_obito %in% "99/99/9999",
+    dt_diag  = suppressWarnings(dmy(dt_diag)),
+    dt_trat  = suppressWarnings(dmy(dt_trat)),
+    dt_obito = suppressWarnings(dmy(dt_obito))
+  )
+```
+
+# 2. Coorte
+
+Critérios (INCA, item 23: `DIAGANT` 1 = sem diagnóstico/sem tratamento; 2 = com diagnóstico/sem tratamento; paciente chegou ao hospital **sem tratamento anterior**), e tratamento iniciado no hospital (`DTINITRT` diferente de 88/88/8888).
+
+```{r}
+# Aplica os filtros da coorte, um por etapa, e monta o fluxo com quantas pacientes saem em cada uma
+etapa0 <- dados
+etapa1 <- etapa0 %>% filter(diag_trat %in% c("1", "2"))                  # sem tratamento anterior
+etapa2 <- etapa1 %>% filter(!sem_trat_hosp, !is.na(dt_trat))             # tratou no hospital
+etapa3 <- etapa2 %>% filter(uf == uf_residencia)                         # residente em MG
+etapa4 <- etapa3 %>% filter(!is.na(dt_diag), dt_diag >= janela_inicio, dt_diag <= janela_fim)
+etapa5 <- etapa4 %>% filter(dt_trat >= janela_inicio, dt_trat <= janela_fim)
+etapa6 <- if (apenas_sus) etapa5 %>% filter(cust_trat == "1") else etapa5            # SUS
+etapa7 <- if (apenas_analiticos) etapa6 %>% filter(analitico == "1") else etapa6     # analíticos
+coorte_bruta <- etapa7
+
+fluxo <- tibble(
+  Etapa = c("Registros no arquivo do RHC",
+            "Sem tratamento anterior (DIAGANT 1 ou 2)",
+            "Com tratamento iniciado no hospital (exclui 88/88/8888)",
+            paste0("Residentes em ", uf_residencia),
+            paste0("Diagnóstico entre ", format(janela_inicio, "%d/%m/%Y"), " e ", format(janela_fim, "%d/%m/%Y")),
+            "Início do tratamento na mesma janela",
+            ifelse(apenas_sus, "Tratamento custeado pelo SUS (CUSTRATAMTUMOR = 1)", "Filtro SUS desligado"),
+            ifelse(apenas_analiticos, "Casos analíticos (ANALITIC = 1)", "Filtro de casos analíticos desligado")),
+  n = c(nrow(etapa0), nrow(etapa1), nrow(etapa2), nrow(etapa3), nrow(etapa4), nrow(etapa5), nrow(etapa6), nrow(etapa7))
+) %>%
+  mutate(Excluídas = c("-", fmt_n(-diff(n))), N = fmt_n(n)) %>%
+  select(Etapa, N, Excluídas)
+
+tabela_kable(fluxo, "Fluxo de seleção da coorte", arquivo = "fluxo_coorte")
+```
+
+```{r}
+# Lê as tabelas de referência e cria as variáveis usadas nas análises
+# Tabelas de referência: município -> mesorregião (IBGE) e nome oficial do município
+mesorregioes <- read_csv(achar_arquivo(arq_mesorregioes, "mesorregi"), col_types = cols(.default = "c")) %>%
+  mutate(mesorregiao = coalesce(unname(rotulos_mesorregiao[mesorregiao]), mesorregiao)) %>%
+  select(codigo_ibge, mesorregiao)
+
+municipios_mg <- read_csv(achar_arquivo(arq_dtb, "DTB"), col_types = cols(.default = "c"), show_col_types = FALSE)
+names(municipios_mg)[1:3] <- c("uf_nome", "codigo_ibge", "municipio")
+municipios_mg <- municipios_mg %>% filter(uf_nome == "Minas Gerais") %>% select(codigo_ibge, municipio)
+
+# Cria as variáveis da análise: junta mesorregião e município pelo código IBGE e calcula faixas, estadiamento e tempos
+coorte <- coorte_bruta %>%
+  left_join(mesorregioes, by = c("cidade_ibge" = "codigo_ibge")) %>%
+  left_join(municipios_mg, by = c("cidade_ibge" = "codigo_ibge")) %>%
+  mutate(
+    # Procedência: mesorregião do IBGE (no lugar de "RMBH x demais municípios")
+    mesorregiao = coalesce(mesorregiao, texto_nao_mg),
+    municipio = coalesce(municipio, paste0("Código ", cidade_ibge, " (fora de MG)")),
+
+    faixa_etaria = cut(idade, breaks = c(-Inf, 19, 39, 59, Inf), labels = c("<20", "20-39", "40-59", "60+")),
+    diag_trat_rot = factor(unname(rotulos_diagant[diag_trat]), levels = unname(rotulos_diagant)),
+
+    # Estadiamento (INCA, item 28.a): 0 = in situ; 88 = não estadiável; 99 = sem informação
+    estadio_num = str_extract(estadiam, "^[0-4]"),
+    estadio_grupo = factor(
+      case_when(
+        estadio_num == "0" ~ "0 (in situ)",
+        estadio_num %in% c("1", "2") ~ "I-II",
+        estadio_num %in% c("3", "4") ~ "III-IV",
+        estadiam == "88" ~ "Não estadiável (88)",
+        estadiam == "99" ~ "Sem informação (99)",
+        TRUE ~ "Não preenchido ou código não reconhecido"
+      ),
+      levels = c("0 (in situ)", "I-II", "III-IV", "Não estadiável (88)", "Sem informação (99)",
+                 "Não preenchido ou código não reconhecido")
+    ),
+
+    # Tempo entre o diagnóstico e o início do tratamento, em dias, COM sinal
+    dias_diag_trat = as.numeric(dt_trat - dt_diag),
+    faixa_dias = cut(
+      dias_diag_trat,
+      breaks = c(-Inf, -1, 30, 60, 90, 120, 180, 365, Inf),
+      labels = c("Tratamento antes do diagnóstico (<0)", "0-30", "31-60", "61-90", "91-120", "121-180", "181-365", "365+")
+    ),
+    no_prazo = dias_diag_trat <= prazo_lei,   # TRUE se começou em até 60 dias (intervalo negativo conta como dentro)
+    ano_diag = factor(year(dt_diag)),
+
+    # Sobrevida: do diagnóstico (INCA, item 22) até o óbito ou a data de censura
+    evento_obito  = as.integer(!is.na(dt_obito) & dt_obito <= data_corte),
+    # evento_obito: 1 = óbito até a data de corte; 0 = censurada. evento_cancer: só óbito por câncer
+    evento_cancer = as.integer(obito_canc %in% "1" & !is.na(dt_obito) & dt_obito <= data_corte),
+    data_fim      = if_else(evento_obito == 1L, dt_obito, data_corte),
+    tempo_meses   = as.numeric(data_fim - dt_diag) / 30.4375
+  )
+
+nrow(coorte)   # pacientes na coorte final
+```
+
+## 2.1 Verificações de qualidade
+
+```{r}
+# Checagens automáticas do arquivo e da coorte: cada linha é uma verificação (OK, ATENÇÃO ou INFO)
+n_tempo_neg    <- sum(coorte$dias_diag_trat < 0, na.rm = TRUE)
+n_dia_aprox    <- sum(day(coorte$dt_diag) == 15 | (day(coorte$dt_diag) == 30 & month(coorte$dt_diag) == 6) |
+                      day(coorte$dt_trat) == 15 | (day(coorte$dt_trat) == 30 & month(coorte$dt_trat) == 6), na.rm = TRUE)
+loc_fora       <- setdiff(unique(na.omit(dados$loc_tumor)), loc_esperadas)
+hist_sem_rot   <- setdiff(unique(na.omit(dados$tipo_hist)), names(rotulos_hist))
+causa_sem_rot  <- setdiff(unique(na.omit(dados$causa_obito)), names(rotulos_causa))
+revisar        <- intersect(unique(coorte$tipo_hist), codigos_revisar)
+lista <- function(x) if (length(x) == 0) "nenhum" else paste(sort(x), collapse = ", ")
+
+qualidade <- bind_rows(
+  chk("Sexo feminino em todos os registros", sum(dados$sexo != "2", na.rm = TRUE),
+      paste0(sum(dados$sexo != "2", na.rm = TRUE), " registro(s) diferente(s)")),
+  chk("Grupo CID-10 (GDGRUPO) igual ao esperado", sum(dados$gd_grupo != gd_esperado, na.rm = TRUE),
+      paste0("esperado ", gd_esperado, "; ", sum(dados$gd_grupo != gd_esperado, na.rm = TRUE), " diferente(s)")),
+  chk("Localização (LOCTUPRI) dentro do esperado", length(loc_fora), paste("fora do esperado:", lista(loc_fora))),
+  chk("Campo de exames com 7 posições", n_exames_fora_do_padrao, paste0(n_exames_fora_do_padrao, " registro(s) fora do padrão")),
+  chk("Exames: 'não se aplica' e 'sem informação' sempre 0",
+      sum(dados$exames_nao_aplica != 0 | dados$exames_sem_info != 0, na.rm = TRUE),
+      paste0(sum(dados$exames_nao_aplica != 0 | dados$exames_sem_info != 0, na.rm = TRUE), " registro(s) com valor diferente de 0")),
+  chk("DTINITRT = 88/88/8888 coincide com PRITRATH = 1 (sem tratamento no hospital)",
+      sum(dados$sem_trat_hosp != (dados$trat_hosp %in% "1")),
+      paste0(sum(dados$sem_trat_hosp != (dados$trat_hosp %in% "1")), " discordância(s)")),
+  chk("Data do diagnóstico válida", sum(is.na(dados$dt_diag)), paste0(sum(is.na(dados$dt_diag)), " data(s) vazia(s) ou inválida(s)")),
+  chk("Datas 99/99/9999 (desconhecidas)", sum(dados$data_desconhecida), paste0(sum(dados$data_desconhecida), " registro(s)")),
+  chk("Idade plausível (0 a 110 anos)", sum(dados$idade < 0 | dados$idade > 110 | is.na(dados$idade)),
+      paste0(sum(dados$idade < 0 | dados$idade > 110 | is.na(dados$idade)), " registro(s) fora do intervalo")),
+  chk("Tipos histológicos com rótulo", length(hist_sem_rot), paste("sem rótulo:", lista(hist_sem_rot))),
+  chk("Causas de óbito com rótulo", length(causa_sem_rot), paste("sem rótulo:", lista(causa_sem_rot))),
+  chk("OBITOPORCANCER coerente com a data do óbito",
+      sum((dados$obito_canc %in% c("1", "2")) != !is.na(dados$dt_obito)),
+      paste0(sum((dados$obito_canc %in% c("1", "2")) != !is.na(dados$dt_obito)), " inconsistência(s)")),
+  chk("Histologias incomuns para o sítio (conferir no prontuário)", length(revisar), paste("na coorte:", lista(revisar))),
+  chk("Coorte: município de residência identificado em MG", sum(coorte$mesorregiao == texto_nao_mg),
+      paste0(sum(coorte$mesorregiao == texto_nao_mg), " paciente(s) com UF = MG e município fora de MG")),
+  chk("Coorte: tempo até óbito/censura nunca negativo", sum(coorte$tempo_meses < 0, na.rm = TRUE),
+      paste0(sum(coorte$tempo_meses < 0, na.rm = TRUE), " registro(s)")),
+  chk("Registros 'INCOERENTE' no RHC (mantidos)", sum(dados$classif %in% "INCOERENTE"),
+      paste0(sum(dados$classif %in% "INCOERENTE"), " no arquivo")),
+  chk("Informativo: tratamento antes da data do diagnóstico", n_tempo_neg,
+      paste0(n_tempo_neg, " na coorte; contam como dentro do prazo"), info = TRUE),
+  chk("Informativo: datas com dia 15 ou 30/06 (podem ser aproximadas, regra do INCA)", n_dia_aprox,
+      paste0(n_dia_aprox, " paciente(s) na coorte"), info = TRUE),
+  chk("Informativo: casos não analíticos na coorte", sum(coorte$analitico == "2", na.rm = TRUE),
+      paste0(sum(coorte$analitico == "2", na.rm = TRUE), " paciente(s)"), info = TRUE),
+  chk("Informativo: mais de um tumor primário", sum(coorte$mais_um_tumor %in% c("2", "3")),
+      paste0(sum(coorte$mais_um_tumor %in% c("2", "3")), " paciente(s) (sim ou duvidoso)"), info = TRUE)
+)
+
+tabela_kable(qualidade, "Verificações de qualidade dos dados", arquivo = "qualidade_dados",
+             notas = "ATENÇÃO = há registros a revisar; INFO = observação, sem erro.",
+             destacar = which(qualidade$Status == "ATENÇÃO"))
+```
+
+# 3. Perfil sociodemográfico
+
+## 3.1 Idade
+
+```{r}
+# Resumo da idade, tabela por faixa etária e histograma (a mediana vai na nota do gráfico)
+# INCA, item 8: idade na data da PRIMEIRA CONSULTA no hospital (não no diagnóstico)
+tibble(
+  Medida = c("Pacientes", "Mediana (anos)", "Q1-Q3", "Mínimo-máximo"),
+  Valor = c(fmt_n(sum(!is.na(coorte$idade))), fmt_num(median(coorte$idade, na.rm = TRUE)),
+            paste0(fmt_num(quantile(coorte$idade, 0.25, na.rm = TRUE, names = FALSE)), "-", fmt_num(quantile(coorte$idade, 0.75, na.rm = TRUE, names = FALSE))),
+            paste0(min(coorte$idade, na.rm = TRUE), "-", max(coorte$idade, na.rm = TRUE)))
+) %>%
+  tabela_kable("Idade na primeira consulta", arquivo = "idade_resumo")
+
+contar(coorte, "faixa_etaria") %>%
+  tabela_padrao("Distribuição por faixa etária", "Faixa etária (anos)", arquivo = "faixa_etaria")
+
+# Histograma em faixas de 5 anos; a linha tracejada marca a mediana
+grafico_idade <- ggplot(coorte, aes(x = idade)) +
+  geom_histogram(binwidth = 5, boundary = 0, fill = cor_principal, color = "white") +
+  geom_vline(xintercept = median(coorte$idade, na.rm = TRUE), linetype = "dashed", color = cor_texto) +
+  labs(title = titulo_cancer("Distribuição da idade na primeira consulta"),
+       x = "Idade (anos)", y = "Pacientes",
+       caption = nota_grafico(paste0("Linha tracejada = mediana (", fmt_num(median(coorte$idade, na.rm = TRUE), 0), " anos)")))
+# salvar_figura() grava a figura em saidas/<câncer>/figuras/ (PNG e PDF)
+salvar_figura(grafico_idade, "idade_histograma", altura = 4)
+grafico_idade
+```
+
+## 3.2 Raça/cor
+
+```{r}
+# contar() faz a contagem com os rótulos do INCA; tabela_padrao() formata, mostra e exporta a tabela
+contar(coorte, "raca", rotulos_raca) %>%
+  tabela_padrao("Distribuição por raça/cor", "Raça/cor", arquivo = "raca_cor")
+```
+
+## 3.3 Escolaridade
+
+```{r}
+# Mesma lógica da raça/cor: contar() + tabela_padrao()
+contar(coorte, "escol", rotulos_escol) %>%
+  tabela_padrao("Distribuição por escolaridade", "Escolaridade", arquivo = "escolaridade")
+```
+
+## 3.4 Estado civil
+
+```{r}
+# Mesma lógica da raça/cor: contar() + tabela_padrao()
+contar(coorte, "est_civil", rotulos_estcivil) %>%
+  tabela_padrao("Estado civil", "Estado civil", arquivo = "estado_civil")
+```
+
+## 3.5 Procedência: mesorregião de residência
+
+```{r}
+# Contagem por mesorregião: tabela, gráfico de barras e mapa de Minas Gerais
+meso <- contar(coorte, "mesorregiao", ordenar_por_n = TRUE)
+
+meso %>%
+  tabela_padrao("Mesorregião de residência", "Mesorregião", arquivo = "mesorregiao",
+                notas = "Mesorregiões geográficas do IBGE. 'Não identificada' = código de município inexistente em MG.")
+
+grafico_meso <- grafico_barras(meso, "Mesorregião de residência", "mesorregiao", subtitulo = "Mesorregiões do IBGE (Minas Gerais)")
+grafico_meso
+
+mapa_meso <- grafico_mapa_mg(meso, mesorregioes, "Pacientes por mesorregião de residência", "mapa_mesorregiao")
+if (!is.null(mapa_meso)) mapa_meso
+```
+
+## 3.6 Municípios de residência mais frequentes
+
+```{r}
+# Os 20 municípios com mais pacientes; sem linha de total porque é apenas um recorte
+contar(coorte, "municipio", ordenar_por_n = TRUE) %>%
+  slice_head(n = 20) %>%
+  tabela_padrao("20 municípios com mais pacientes", "Município", arquivo = "municipios_top20", total = FALSE,
+                notas = "Percentual sobre o total da coorte.")
+```
+
+## 3.7 Painel: perfil sociodemográfico
+
+```{r}
+# Painel com idade, mesorregião e mapa (se o mapa não puder ser feito, o painel sai sem ele)
+painel(list(grafico_idade, grafico_meso, mapa_meso), "painel_sociodemografico",
+       titulo = paste0("Perfil sociodemográfico: câncer de ", nome_cancer), ncol = 3, largura = 18, altura = 6)
+```
+
+# 4. Perfil clínico
+
+## 4.1 Localização do tumor primário
+
+```{r}
+# Localização do tumor primário (CID-10), com os rótulos definidos no começo do Rmd
+contar(coorte, "loc_tumor", rotulos_local) %>%
+  tabela_padrao("Localização do tumor primário", "Localização anatômica (CID-10)", arquivo = "localizacao")
+```
+
+## 4.2 Tipo histológico
+
+```{r}
+# Tipo histológico (CID-O-3), do mais ao menos frequente
+contar(coorte, "tipo_hist", rotulos_hist, ordenar_por_n = TRUE) %>%
+  tabela_padrao("Tipo histológico", "Tipo histológico (CID-O-3)", arquivo = "tipo_histologico",
+                notas = "Rótulos conforme a CID-O. Códigos incomuns para o sítio devem ser conferidos no prontuário.")
+```
+
+## 4.3 Estadiamento
+
+```{r}
+# Estadiamento agrupado (0, I-II, III-IV, 88 e 99); todas as pacientes ficam no denominador
+estadiamento <- contar(coorte, "estadio_grupo")
+
+estadiamento %>%
+  tabela_padrao("Estadiamento clínico", "Estádio", arquivo = "estadiamento",
+                notas = "88 = tumor não estadiável; 99 = sem informação (INCA, item 28.a). Todas as pacientes entram no denominador.")
+
+grafico_estadio <- grafico_barras(estadiamento, "Estadiamento clínico ao diagnóstico", "estadiamento", ordenar = FALSE)
+grafico_estadio
+```
+
+## 4.4 Base mais importante para o diagnóstico
+
+```{r}
+# Base mais importante para o diagnóstico (item 24 da ficha do INCA)
+contar(coorte, "base_impor", rotulos_base) %>%
+  tabela_padrao("Base mais importante para o diagnóstico do tumor", "Base diagnóstica", arquivo = "base_diagnostica")
+```
+
+## 4.5 Chegada ao hospital e origem do encaminhamento
+
+```{r}
+# Se a paciente chegou com diagnóstico prévio e quem a encaminhou
+contar(coorte, "diag_trat", rotulos_diagant) %>%
+  tabela_padrao("Diagnóstico e tratamento anteriores à chegada ao hospital", "Situação", arquivo = "diagant")
+
+contar(coorte, "orig_encam", rotulos_origem) %>%
+  tabela_padrao("Origem do encaminhamento", "Origem", arquivo = "origem_encaminhamento")
+```
+
+## 4.6 Histórico familiar, álcool e tabaco
+
+```{r}
+# Histórico familiar, consumo de álcool e de tabaco
+contar(coorte, "hist_fam", rotulos_histfam) %>%
+  tabela_padrao("Histórico familiar de câncer", "Histórico familiar", arquivo = "historico_familiar")
+
+contar(coorte, "alcool", rotulos_habito) %>%
+  tabela_padrao("Histórico de consumo de bebida alcoólica", "Consumo de álcool", arquivo = "alcool")
+
+contar(coorte, "tabaco", rotulos_habito) %>%
+  tabela_padrao("Histórico de consumo de tabaco", "Consumo de tabaco", arquivo = "tabaco")
+```
+
+## 4.7 Exames relevantes para o diagnóstico e planejamento do tratamento
+
+```{r}
+# Conta quantas pacientes fizeram cada tipo de exame (uma paciente pode ter vários)
+exames <- tibble(
+  categoria = c("Exame clínico e patologia clínica", "Exames por imagem", "Endoscopia e cirurgia exploradora",
+                "Anatomia patológica", "Marcadores tumorais"),
+  n = c(sum(coorte$exame_clinpato == 1, na.rm = TRUE), sum(coorte$exames_imag == 1, na.rm = TRUE),
+        sum(coorte$endos_cirur == 1, na.rm = TRUE), sum(coorte$anatopato == 1, na.rm = TRUE),
+        sum(coorte$marc_tumor == 1, na.rm = TRUE))
+) %>%
+  mutate(pct = 100 * n / nrow(coorte)) %>%
+  arrange(desc(n))
+
+tabela_padrao(exames, "Exames relevantes para o diagnóstico e planejamento do tratamento", "Tipo de exame",
+              arquivo = "exames", total = FALSE,
+              notas = "A paciente pode ter mais de um tipo de exame; os percentuais não somam 100%.")
+```
+
+# 5. Tratamento
+
+## 5.1 Primeiro tratamento recebido no hospital
+
+```{r}
+# Modalidades (cada dígito do campo é uma modalidade) e combinações do primeiro tratamento
+# O campo PRITRATH pode ter vários dígitos (ex.: 243 = cirurgia + quimioterapia + radioterapia)
+modalidades <- coorte %>%
+  mutate(digito = map(trat_hosp, ~ unique(strsplit(.x, "")[[1]]))) %>%
+  select(codigo, digito) %>%
+  unnest(digito) %>%
+  filter(!is.na(digito)) %>%
+  count(digito, name = "n") %>%
+  mutate(categoria = ifelse(digito %in% names(rotulos_tratamento), unname(rotulos_tratamento[digito]),
+                            paste0("Não categorizado (", digito, ")")),
+         pct = 100 * n / nrow(coorte)) %>%
+  arrange(desc(n)) %>%
+  select(categoria, n, pct)
+
+tabela_padrao(modalidades, "Modalidades do primeiro tratamento", "Tratamento", arquivo = "modalidades_tratamento",
+              total = FALSE, notas = "Uma paciente pode receber mais de uma modalidade; os percentuais não somam 100%.")
+
+grafico_modalidades <- grafico_barras(modalidades, "Modalidades do primeiro tratamento", "modalidades_tratamento",
+                                      subtitulo = "Uma paciente pode receber mais de uma modalidade")
+
+combinacoes <- coorte %>%
+  mutate(categoria = map_chr(trat_hosp, function(x) {
+    if (is.na(x)) return("Não preenchido")
+    d <- sort(unique(strsplit(x, "")[[1]]))
+    paste(ifelse(d %in% names(rotulos_tratamento), unname(rotulos_tratamento[d]), d), collapse = " + ")
+  })) %>%
+  count(categoria, name = "n") %>%
+  arrange(desc(n)) %>%
+  mutate(pct = 100 * n / sum(n))
+
+tabela_padrao(combinacoes, "Combinações de modalidades no primeiro tratamento", "Combinação",
+              arquivo = "combinacoes_tratamento")
+```
+
+## 5.2 Custeio do diagnóstico e do tratamento
+
+```{r}
+# Quem custeou o diagnóstico e o tratamento (o tratamento é sempre SUS, pois a coorte é filtrada)
+contar(coorte, "cust_diag", rotulos_custeio) %>%
+  tabela_padrao("Custeio do diagnóstico do tumor no hospital", "Custeio do diagnóstico", arquivo = "custeio_diagnostico",
+                notas = "'Não se aplica' = diagnóstico feito fora do hospital.")
+
+contar(coorte, "cust_trat", rotulos_custeio) %>%
+  tabela_padrao("Custeio do tratamento do tumor no hospital", "Custeio do tratamento", arquivo = "custeio_tratamento")
+```
+
+## 5.3 Painel: estadiamento e tratamento
+
+```{r}
+# Painel com estadiamento e modalidades de tratamento
+painel(list(grafico_estadio, grafico_modalidades), "painel_clinico_tratamento",
+       titulo = paste0("Estadiamento e tratamento: câncer de ", nome_cancer), altura = 6)
+```
+
+# 6. Tempo entre diagnóstico e tratamento (Lei 12.732/2012)
+
+A Lei 12.732/2012 garante o início do primeiro tratamento no SUS em até **60 dias** a partir do diagnóstico em laudo patológico. Para o INCA, a data do diagnóstico (item 22) é preferencialmente a da confirmação anatomopatológica. O intervalo foi calculado **com sinal**: tratamento iniciado antes da data do laudo (intervalo negativo) é mantido e conta como dentro do prazo.
+
+## 6.1 Visão geral
+
+```{r}
+# Proporção tratada em até 60 dias (Lei 12.732) com IC 95% de Wilson; mediana do intervalo com sinal
+prazo_por(coorte) %>%
+  formatar_prazo("Grupo") %>%
+  tabela_kable("Tratamento iniciado em até 60 dias do diagnóstico", arquivo = "prazo_geral",
+            notas = paste0("IC 95% de Wilson. Mediana e quartis em dias corridos. ",
+                           "Tratamento antes do laudo: ", sum(coorte$dias_diag_trat < 0, na.rm = TRUE), " paciente(s)."))
+```
+
+## 6.2 Distribuição do tempo
+
+```{r}
+# Distribuição do intervalo diagnóstico-tratamento em faixas de dias; azul = dentro do prazo de 60 dias
+faixas <- contar(coorte, "faixa_dias")
+
+tabela_padrao(faixas, "Tempo entre o diagnóstico e o início do tratamento", "Dias", arquivo = "faixas_dias")
+
+faixas <- faixas %>% mutate(dentro = categoria %in% c("Tratamento antes do diagnóstico (<0)", "0-30", "31-60"))
+faixas$categoria <- factor(faixas$categoria, levels = faixas$categoria)
+grafico_faixas <- ggplot(faixas, aes(x = categoria, y = n, fill = dentro)) +
+  geom_col(width = 0.75) +
+  geom_text(aes(label = ifelse(celula_pequena(n), paste0("<", min_celula), paste0(fmt_n(n), "\n", fmt_pct(pct)))),
+            vjust = -0.3, size = 3.2, color = cor_texto, lineheight = 0.9) +
+  scale_fill_manual(values = c(`TRUE` = cor_secundaria, `FALSE` = cor_principal),
+                    labels = c(`TRUE` = "Dentro do prazo (até 60 dias)", `FALSE` = "Fora do prazo"), name = NULL) +
+  scale_x_discrete(labels = function(x) str_wrap(x, 12)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) +
+  labs(title = titulo_cancer("Tempo entre o diagnóstico e o início do tratamento"), x = "Dias", y = "Pacientes", caption = fonte_dados)
+salvar_figura(grafico_faixas, "tempo_diag_tratamento", largura = 9)
+grafico_faixas
+```
+
+## 6.3 Prazo por ano, mesorregião, estadiamento e chegada ao hospital
+
+```{r}
+# A mesma tabela de prazo, separada por ano, mesorregião, estadiamento e chegada ao hospital
+prazo_por(coorte, "ano_diag") %>%
+  formatar_prazo("Ano do diagnóstico") %>%
+  tabela_kable("Prazo da Lei 12.732 por ano do diagnóstico", arquivo = "prazo_ano")
+
+prazo_por(coorte, "mesorregiao") %>%
+  arrange(desc(n)) %>%
+  formatar_prazo("Mesorregião") %>%
+  tabela_kable("Prazo da Lei 12.732 por mesorregião de residência", arquivo = "prazo_mesorregiao",
+            notas = "Mesorregiões com poucas pacientes têm estimativas instáveis.")
+
+prazo_por(coorte, "estadio_grupo") %>%
+  formatar_prazo("Estadiamento") %>%
+  tabela_kable("Prazo da Lei 12.732 por estadiamento", arquivo = "prazo_estadiamento")
+
+prazo_por(coorte, "diag_trat_rot") %>%
+  formatar_prazo("Chegada ao hospital") %>%
+  tabela_kable("Prazo da Lei 12.732 segundo a chegada ao hospital", arquivo = "prazo_diagant",
+            notas = "Com diagnóstico prévio, parte do intervalo ocorreu antes da chegada ao IMP.")
+```
+
+```{r}
+# Gráfico do % tratado em até 60 dias por ano; grupos com menos de 5 pacientes são omitidos
+pz_ano <- prazo_por(coorte, "ano_diag") %>% filter(!celula_pequena(n))
+grafico_prazo_ano <- ggplot(pz_ano, aes(x = grupo, y = pct)) +
+  geom_col(fill = cor_secundaria, width = 0.7) +
+  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.2, color = cor_texto) +
+  geom_text(aes(y = hi, label = paste0(fmt_num(pct, 0), "%\n(n=", n, ")")), vjust = -0.3, size = 3.2, lineheight = 0.9) +
+  scale_y_continuous(limits = c(0, 120), breaks = seq(0, 100, 20)) +
+  labs(title = titulo_cancer("Pacientes tratadas em até 60 dias, por ano do diagnóstico"),
+       x = NULL, y = "% tratadas em até 60 dias", caption = nota_grafico("Barras de erro = IC 95% de Wilson"))
+salvar_figura(grafico_prazo_ano, "prazo_por_ano", largura = 9)
+grafico_prazo_ano
+```
+
+```{r}
+# Painel com a distribuição do intervalo e o prazo por ano
+painel(list(grafico_faixas, grafico_prazo_ano), "painel_prazo_lei",
+       titulo = paste0("Lei 12.732/2012: câncer de ", nome_cancer), largura = 14, altura = 5.5)
+```
+
+## 6.4 Associação com o cumprimento do prazo
+
+```{r}
+# Testa se cada característica está associada a cumprir o prazo (qui-quadrado; p simulado se esperado < 5)
+variaveis_assoc <- c(estadio_grupo = "Estadiamento", mesorregiao = "Mesorregião", ano_diag = "Ano do diagnóstico",
+                     diag_trat_rot = "Chegada ao hospital", faixa_etaria = "Faixa etária")
+
+map_dfr(names(variaveis_assoc), function(v) {
+  bind_cols(tibble(`Variável` = unname(variaveis_assoc[v])), p_associacao(coorte, v))
+}) %>%
+  mutate(p = fmt_p(p)) %>%
+  rename(`valor de p` = p, `Método` = metodo) %>%
+  tabela_kable("Associação entre características e cumprimento do prazo", arquivo = "associacao_prazo",
+            notas = "Análise exploratória, sem correção para múltiplas comparações.")
+```
+
+# 7. Desfechos
+
+## 7.1 Estado da doença ao final do primeiro tratamento
+
+```{r}
+# Estado da doença ao final do primeiro tratamento (item 35 da ficha do INCA)
+contar(coorte, "est_df_hosp", rotulos_resultado) %>%
+  tabela_padrao("Estado da doença ao final do primeiro tratamento no hospital", "Resultado", arquivo = "resultado_tratamento")
+```
+
+## 7.2 Óbitos
+
+```{r}
+# Óbitos: por câncer, causa básica e tempo do diagnóstico/tratamento até o óbito
+# INCA, item 37: óbito por câncer 1 = sim; 2 = não (outra causa); 9 = ignorado.
+# (No arquivo, 0 = paciente sem data de óbito.)
+contar(coorte, "obito_canc", rotulos_obito_cancer) %>%
+  tabela_padrao("Óbito pelo câncer", "Óbito", arquivo = "obito_cancer",
+                notas = "Inclui óbitos registrados após a data de censura da sobrevida.")
+
+contar(filter(coorte, !is.na(causa_obito)), "causa_obito", rotulos_causa, ordenar_por_n = TRUE) %>%
+  tabela_padrao("Causa básica do óbito (CID-10)", "Causa", arquivo = "causa_obito")
+
+obitos <- coorte %>%
+  filter(evento_obito == 1) %>%
+  mutate(dias_diag_morte = as.numeric(dt_obito - dt_diag), dias_trat_morte = as.numeric(dt_obito - dt_trat))
+
+tibble(
+  Intervalo = c("Diagnóstico até o óbito", "Início do tratamento até o óbito"),
+  N = rep(ifelse(celula_pequena(nrow(obitos)), paste0("<", min_celula), fmt_n(nrow(obitos))), 2),
+  `Mediana de dias [Q1-Q3]` = c(
+    paste0(fmt_num(median(obitos$dias_diag_morte), 0), " [", fmt_num(quantile(obitos$dias_diag_morte, 0.25, names = FALSE), 0), "-",
+           fmt_num(quantile(obitos$dias_diag_morte, 0.75, names = FALSE), 0), "]"),
+    paste0(fmt_num(median(obitos$dias_trat_morte), 0), " [", fmt_num(quantile(obitos$dias_trat_morte, 0.25, names = FALSE), 0), "-",
+           fmt_num(quantile(obitos$dias_trat_morte, 0.75, names = FALSE), 0), "]"))
+) %>%
+  tabela_kable("Tempo entre diagnóstico/tratamento e óbito", arquivo = "tempo_ate_obito",
+            notas = paste0("Apenas pacientes com óbito até ", format(data_corte, "%d/%m/%Y"), "."))
+```
+
+## 7.3 Sobrevida global (Kaplan-Meier)
+
+O tempo é contado **a partir da data do diagnóstico** (INCA, item 22). O arquivo do RHC não traz a data do último contato (Ficha de Seguimento): quem não tem óbito registrado é **censurada em `r format(data_corte, "%d/%m/%Y")`**. Se houver perda de seguimento sem registro, a sobrevida pode estar superestimada.
+
+```{r}
+# Kaplan-Meier global: tempo em meses do diagnóstico até o óbito; quem não morreu é censurada na data de corte
+dados_km <- coorte %>% filter(tempo_meses >= 0)
+ajuste <- survfit(Surv(tempo_meses, evento_obito) ~ 1, data = dados_km)
+
+# formatar_km() monta a tabela com a sobrevida em 12, 36 e 60 meses e o IC 95%
+formatar_km(ajuste) %>%
+  tabela_kable("Sobrevida global em 12, 36 e 60 meses", arquivo = "sobrevida_global",
+            subtitulo = paste0("Seguimento mediano (Kaplan-Meier reverso): ", fmt_num(seguimento_mediano(dados_km)), " meses. ",
+                               "Mediana de sobrevida: ",
+                               ifelse(is.na(km_mediana(ajuste)), "não atingida", paste0(fmt_num(km_mediana(ajuste)), " meses"))),
+            notas = paste0("Óbitos até a data de censura: ", sum(coorte$evento_obito), " de ", nrow(coorte), "."))
+
+# grafico_km() desenha a curva de Kaplan-Meier e salva a figura
+grafico_km_global <- grafico_km(ajuste, "Sobrevida global", "km_global")
+grafico_km_global
+```
+
+## 7.4 Sobrevida câncer-específica
+
+Considera apenas os óbitos por câncer (`OBITOPORCANCER = 1`); óbitos por outras causas são censurados na data do óbito.
+
+```{r}
+# Mesma análise, mas só os óbitos por câncer contam como evento
+ajuste_cancer <- survfit(Surv(tempo_meses, evento_cancer) ~ 1, data = dados_km)
+
+formatar_km(ajuste_cancer) %>%
+  tabela_kable("Sobrevida câncer-específica em 12, 36 e 60 meses", arquivo = "sobrevida_cancer",
+            notas = paste0("Óbitos por câncer até a data de censura: ", sum(coorte$evento_cancer), "."))
+
+grafico_km_cancer <- grafico_km(ajuste_cancer, "Sobrevida câncer-específica", "km_cancer", eixo_y = "Sobrevida câncer-específica")
+grafico_km_cancer
+```
+
+## 7.5 Painel de sobrevida
+
+```{r}
+# Painel com as curvas de sobrevida global e câncer-específica
+painel(list(grafico_km_global, grafico_km_cancer), "painel_sobrevida",
+       titulo = paste0("Sobrevida: câncer de ", nome_cancer), ncol = 2, largura = 13, altura = 6)
+```
+
+# 8. Pacientes novas por mês de diagnóstico (série temporal)
+
+Número de pacientes da coorte por mês da data do diagnóstico. É uma série de **pacientes atendidas no IMP**, não a incidência na população.
+
+```{r}
+# Número de pacientes por mês de diagnóstico (série temporal) e gráfico
+# Meses sem nenhuma paciente entram como zero
+meses <- seq.Date(from = floor_date(janela_inicio, "month"), to = floor_date(janela_fim, "month"), by = "month")
+
+serie <- coorte %>%
+  mutate(ano_mes = floor_date(dt_diag, "month")) %>%
+  count(ano_mes, name = "casos") %>%
+  complete(ano_mes = meses, fill = list(casos = 0))   # acrescenta os meses sem paciente, com valor 0
+
+contar(coorte, "ano_diag") %>%
+  tabela_padrao("Pacientes por ano do diagnóstico", "Ano", arquivo = "casos_por_ano")
+
+# Gráfico da série (contagens mensais agregadas, sem ocultar células pequenas)
+grafico_serie <- ggplot(serie, aes(x = ano_mes, y = casos)) +
+  geom_line(color = cor_principal, linewidth = 0.9) +
+  geom_point(color = cor_principal, size = 1.2) +
+  scale_x_date(breaks = seq.Date(janela_inicio, janela_fim, by = "6 months"), date_labels = "%b %Y") +
+  scale_y_continuous(limits = c(0, NA)) +
+  labs(title = paste0("Pacientes novas por mês de diagnóstico: câncer de ", nome_cancer),
+       x = "Mês/ano do diagnóstico", y = "Número de pacientes",
+       caption = nota_grafico(paste0("Período: ", format(janela_inicio, "%m/%Y"), " a ", format(janela_fim, "%m/%Y")))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+salvar_figura(grafico_serie, "serie_mensal", largura = 10, altura = 5)
+grafico_serie
+```
+
+# 9. Limitações
+
+- Dados secundários de um único hospital: os resultados descrevem as pacientes atendidas no IMP, não a população de Minas Gerais.
+- A coorte exige tratamento iniciado no hospital; quem foi tratada em outro serviço não entra, o que pode superestimar o cumprimento do prazo.
+- Datas aproximadas pelas regras do INCA (dia 15, 30/06) reduzem a precisão do intervalo diagnóstico-tratamento.
+- Sem data do último contato, a sobrevida depende da completude do registro de óbitos.
+- A idade é a da primeira consulta no hospital, não a do diagnóstico.
+- Contagens menores que `r min_celula` foram ocultadas (LGPD).
+
+```{r}
+# Salva os números-chave em saidas/<câncer>/resumo_<câncer>.csv (a sintese.Rmd lê estes arquivos)
+# Resumo numérico desta análise (usado pela sintese.Rmd e para conferência)
+km_t <- km_tempos(ajuste, c(12, 36, 60))
+pega <- function(m) { v <- km_t$surv[km_t$meses == m]; if (length(v) == 0) NA_real_ else v }
+resumo <- tibble(
+  cancer = id_cancer,
+  n_arquivo = nrow(etapa0), n_diagant12 = nrow(etapa1), n_trat_hosp = nrow(etapa2), n_mg = nrow(etapa3),
+  n_dx_janela = nrow(etapa4), n_trat_janela = nrow(etapa5), n_sus = nrow(etapa6), n_final = nrow(coorte),
+  idade_mediana = median(coorte$idade, na.rm = TRUE),
+  dias_med = median(coorte$dias_diag_trat, na.rm = TRUE),
+  dias_neg = sum(coorte$dias_diag_trat < 0, na.rm = TRUE),
+  n_ate60 = sum(coorte$no_prazo, na.rm = TRUE),
+  pct_ate60 = round(100 * mean(coorte$no_prazo, na.rm = TRUE), 1),
+  obitos_ate_corte = sum(coorte$evento_obito),
+  obito_cancer = sum(coorte$obito_canc %in% "1"),
+  obito_outra = sum(coorte$obito_canc %in% "2"),
+  km_mediana_meses = round(km_mediana(ajuste), 1),
+  s12 = round(pega(12), 3), s36 = round(pega(36), 3), s60 = round(pega(60), 3),
+  sem_meso = sum(coorte$mesorregiao == texto_nao_mg),
+  maxfu_meses = round(max(coorte$tempo_meses, na.rm = TRUE), 1)
+)
+dir.create(pasta_saida, recursive = TRUE, showWarnings = FALSE)
+arq_resumo <- file.path(pasta_saida, paste0("resumo_", id_cancer, ".csv"))
+write.csv(resumo, arq_resumo, row.names = FALSE)   # CSV padrão (vírgula): é este que a sintese.Rmd lê
+registrar_saida("tabela", "Resumo numérico da análise (usado na síntese)", arq_resumo)
+```
+
+# Referências
+
+- INSTITUTO NACIONAL DE CÂNCER (INCA). **Registros hospitalares de câncer: planejamento e gestão**. 2. ed. Rio de Janeiro: INCA, 2010. ISBN 978-85-7318-165-4.
+- INSTITUTO NACIONAL DE CÂNCER (INCA). **Ficha de Registro de Tumor** (RHC).
+- BRASIL. **Lei nº 12.732, de 22 de novembro de 2012**. <https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12732.htm>
+- INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE). **Divisão territorial brasileira** e **Códigos dos municípios**. <https://www.ibge.gov.br>
+- ORGANIZAÇÃO MUNDIAL DA SAÚDE. **Classificação Internacional de Doenças para Oncologia: CID-O**. 3. ed. São Paulo: Fundação Oncocentro de São Paulo; Faculdade de Saúde Pública da USP, 2005. ISBN 85-314-0372-3.
+- POSIT TEAM. **RStudio: Integrated Development Environment for R**. Boston, MA: Posit Software, PBC, 2026. <http://www.posit.co/>
+
+# Arquivos exportados
+
+Tudo o que aparece neste relatório foi gravado em `saidas/colo_utero/`: tabelas (`tabelas/`: CSV, HTML e PNG), figuras (`figuras/`: PNG e PDF), painéis (`paineis/`: PNG e PDF), o Excel com todas as tabelas, a lista de arquivos e a versão dos pacotes. Nenhum dado individual de paciente é exportado.
+
+```{r}
+# Grava o Excel, o índice de arquivos e as versões dos pacotes; mostra quantos arquivos de cada tipo foram exportados
+exportar_tudo() %>%
+  tabela_kable("Arquivos exportados", subtitulo = "Pasta de cada tipo de arquivo e quantidade")
+```
+
+# Informações da sessão
+
+```{r}
+# Versões do R e dos pacotes usados (reprodutibilidade)
+sessionInfo()
+```
