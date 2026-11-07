@@ -11,7 +11,6 @@ Estudo descritivo e analítico, com dados do Registro Hospitalar de Câncer (RHC
 | `codigos/sintese.Rmd` | Compara os quatro cânceres (rode depois dos quatro Rmd) |
 | `dados/` | Onde ficam os `.xlsx` do RHC e as tabelas de referência (município -> mesorregião) |
 | `saidas/` | Criada ao rodar (na raiz do projeto): todos os resultados de cada câncer (veja "O que é exportado") |
-| `conferencia/` | Opcional: conferência dos números em Python |
 
 ## Como rodar
 
